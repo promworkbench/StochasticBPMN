@@ -10,9 +10,9 @@
 	<property name="version" value="${env.major_minor}.${env.GITHUB_RUN_NUMBER}" />
 	<property name="project" value="StochasticBPMN" />
 
-	<property name="author" value="Aleksandar Kuzmanoski" />
-	<property name="organization" value="RWTH Aachen" />
-	<property name="description" value="StochasticBPMN" />
+	<property name="author" value="A. Kuzmanoski, S. Velagapudi" />
+	<property name="organization" value="RWTH Aachen University" />
+	<property name="description" value="Stochastic BPMN" />
 	<!-- See https://svn.win.tue.nl/trac/prom/browser/Packages/ProM-Contexts/Trunk/src/org/processmining/contexts/uitopia/packagemanager/PMPackageView.java for a list of known licenses. -->
 	<property name="license" value="GPL" />
 	<property name="logo" value="prom_subtitle_hat_300.png" />
