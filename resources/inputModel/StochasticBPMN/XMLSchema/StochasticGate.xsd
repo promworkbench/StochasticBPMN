@@ -1,0 +1,35 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://example.com/bpmn/stochastic"
+           xmlns="http://example.com/bpmn/stochastic"
+           xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+           xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+           xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+           xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+           elementFormDefault="qualified">
+
+    <xs:element name="gateDistribution">
+        <xs:complexType>
+            <xs:sequence>
+                <!--
+                 We should have at least one element in the distribution. The case where there is only one element,
+                 we support the Parallel gate. For all other gates that have choice we need to have at least two
+                 elements.
+
+                 @To-Do: maybe we can somehow enforce 2 elements on all other gates.
+                 @To-Do: enforce sum of all elements probabilities to be 1.
+                 @To-Do: check whether all elements have unique sets of outgoing sequence flows.
+                 -->
+                <xs:element ref="gateDistributionElement" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="gateDistributionElement">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="outgoing" type="xs:QName" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="probabilityMass" type="xs:float" default="0"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

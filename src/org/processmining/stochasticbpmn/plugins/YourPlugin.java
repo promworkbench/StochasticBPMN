@@ -1,4 +1,4 @@
-package org.processmining.stochasticbpmn.plugins;
+package org.processmining.newpackageivy.plugins;
 
 import java.util.Collection;
 
@@ -9,17 +9,17 @@ import org.processmining.framework.connections.ConnectionCannotBeObtained;
 import org.processmining.framework.plugin.PluginContext;
 import org.processmining.framework.plugin.annotations.Plugin;
 import org.processmining.framework.plugin.annotations.PluginVariant;
-import org.processmining.stochasticbpmn.algorithms.YourAlgorithm;
-import org.processmining.stochasticbpmn.connections.YourConnection;
-import org.processmining.stochasticbpmn.dialogs.YourDialog;
-import org.processmining.stochasticbpmn.help.YourHelp;
-import org.processmining.stochasticbpmn.models.YourFirstInput;
-import org.processmining.stochasticbpmn.models.YourOutput;
-import org.processmining.stochasticbpmn.models.YourSecondInput;
-import org.processmining.stochasticbpmn.parameters.YourParameters;
+import org.processmining.newpackageivy.algorithms.YourAlgorithm;
+import org.processmining.newpackageivy.connections.YourConnection;
+import org.processmining.newpackageivy.dialogs.YourDialog;
+import org.processmining.newpackageivy.help.YourHelp;
+import org.processmining.newpackageivy.models.YourFirstInput;
+import org.processmining.newpackageivy.models.StochasticBpmn;
+import org.processmining.newpackageivy.models.YourSecondInput;
+import org.processmining.newpackageivy.parameters.YourParameters;
 
 @Plugin(name = "Your plug-in name", parameterLabels = { "Name of your first input", "Name of your second input", "Name of your parameters" }, 
-	    returnLabels = { "Name of your output" }, returnTypes = { YourOutput.class }, help = YourHelp.TEXT)
+	    returnLabels = { "Name of your output" }, returnTypes = { StochasticBpmn.class }, help = YourHelp.TEXT)
 public class YourPlugin extends YourAlgorithm {
 
 	/**
@@ -33,7 +33,7 @@ public class YourPlugin extends YourAlgorithm {
 	 */
 	@UITopiaVariant(affiliation = "Your affiliation", author = "Your name", email = "Your e-mail address")
 	@PluginVariant(variantLabel = "Your plug-in name, parameters", requiredParameterLabels = { 0, 1, 2 })
-	public YourOutput run(PluginContext context, YourFirstInput input1, YourSecondInput input2, YourParameters parameters) {
+	public StochasticBpmn run(PluginContext context, YourFirstInput input1, YourSecondInput input2, YourParameters parameters) {
 		// Apply the algorithm depending on whether a connection already exists.
 	    return runConnections(context, input1, input2, parameters);
 	}
@@ -48,7 +48,7 @@ public class YourPlugin extends YourAlgorithm {
 	 */
 	@UITopiaVariant(affiliation = "Your affiliation", author = "Your name", email = "Your e-mail address")
 	@PluginVariant(variantLabel = "Your plug-in name, parameters", requiredParameterLabels = { 0, 1 })
-	public YourOutput runDefault(PluginContext context, YourFirstInput input1, YourSecondInput input2) {
+	public StochasticBpmn runDefault(PluginContext context, YourFirstInput input1, YourSecondInput input2) {
 		// Get the default parameters.
 	    YourParameters parameters = new YourParameters(input1, input2);
 		// Apply the algorithm depending on whether a connection already exists.
@@ -65,7 +65,7 @@ public class YourPlugin extends YourAlgorithm {
 	 */
 	@UITopiaVariant(affiliation = "Your affiliation", author = "Your name", email = "Your e-mail address")
 	@PluginVariant(variantLabel = "Your plug-in name, dialog", requiredParameterLabels = { 0, 1 })
-	public YourOutput runUI(UIPluginContext context, YourFirstInput input1, YourSecondInput input2) {
+	public StochasticBpmn runUI(UIPluginContext context, YourFirstInput input1, YourSecondInput input2) {
 		// Get the default parameters.
 	    YourParameters parameters = new YourParameters(input1, input2);
 	    // Get a dialog for this parameters.
@@ -89,7 +89,7 @@ public class YourPlugin extends YourAlgorithm {
 	 */
 	@UITopiaVariant(affiliation = "Your affiliation", author = "Your name", email = "Your e-mail address")
 	@PluginVariant(variantLabel = "Your plug-in name, dialog", requiredParameterLabels = { })
-	public YourOutput testUI(UIPluginContext context) {
+	public StochasticBpmn testUI(UIPluginContext context) {
 		// Create default inputs.
 		YourFirstInput input1 = new YourFirstInput();
 		YourSecondInput input2 = new YourSecondInput();
@@ -116,7 +116,7 @@ public class YourPlugin extends YourAlgorithm {
 	 * @param input2 The second input.
 	 * @return The output.
 	 */
-	private YourOutput runConnections(PluginContext context, YourFirstInput input1, YourSecondInput input2, YourParameters parameters) {
+	private StochasticBpmn runConnections(PluginContext context, YourFirstInput input1, YourSecondInput input2, YourParameters parameters) {
 		if (parameters.isTryConnections()) {
 			// Try to found a connection that matches the inputs and the parameters.
 			Collection<YourConnection> connections;
@@ -136,7 +136,7 @@ public class YourPlugin extends YourAlgorithm {
 			}
 		}
 		// No connection found. Apply the algorithm to compute a fresh output result.
-		YourOutput output = apply(context, input1, input2, parameters);
+		StochasticBpmn output = apply(context, input1, input2, parameters);
 		if (parameters.isTryConnections()) {
 			// Store a connection containing the inputs, output, and parameters.
 			context.getConnectionManager().addConnection(

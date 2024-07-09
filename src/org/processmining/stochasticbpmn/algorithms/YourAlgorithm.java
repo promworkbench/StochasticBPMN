@@ -1,10 +1,10 @@
-package org.processmining.stochasticbpmn.algorithms;
+package org.processmining.newpackageivy.algorithms;
 
 import org.processmining.framework.plugin.PluginContext;
-import org.processmining.stochasticbpmn.models.YourFirstInput;
-import org.processmining.stochasticbpmn.models.YourOutput;
-import org.processmining.stochasticbpmn.models.YourSecondInput;
-import org.processmining.stochasticbpmn.parameters.YourParameters;
+import org.processmining.newpackageivy.models.YourFirstInput;
+import org.processmining.newpackageivy.models.StochasticBpmn;
+import org.processmining.newpackageivy.models.YourSecondInput;
+import org.processmining.newpackageivy.parameters.YourParameters;
 
 public class YourAlgorithm {
 
@@ -20,7 +20,7 @@ public class YourAlgorithm {
 	 * @param parameters The parameters to use.
 	 * @return The output.
 	 */
-	public YourOutput apply(PluginContext context, YourFirstInput input1, YourSecondInput input2, YourParameters parameters) {
+	public StochasticBpmn apply(PluginContext context, YourFirstInput input1, YourSecondInput input2, YourParameters parameters) {
 		/**
 		 * Put your algorithm here, which computes an output form the inputs provided the parameters.
 		 */
@@ -29,7 +29,7 @@ public class YourAlgorithm {
 		parameters.displayMessage("[YourAlgorithm] First input = " + input1.toString());
 		parameters.displayMessage("[YourAlgorithm] Second input = " + input2.toString());
 		parameters.displayMessage("[YourAlgorithm] Parameters = " + parameters.toString());
-	    YourOutput output = parameters.isYourBoolean() ? new YourOutput(input1) : new YourOutput(input2);
+	    StochasticBpmn output = parameters.isYourBoolean() ? new StochasticBpmn(input1) : new StochasticBpmn(input2);
 		time += System.currentTimeMillis();
 		parameters.displayMessage("[YourAlgorithm] Output = " + output.toString());
 		parameters.displayMessage("[YourAlgorithm] End (took " + time/1000.0 + "  seconds).");
