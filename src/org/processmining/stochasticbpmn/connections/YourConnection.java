@@ -2,7 +2,7 @@ package org.processmining.newpackageivy.connections;
 
 import org.processmining.framework.connections.impl.AbstractConnection;
 import org.processmining.newpackageivy.models.YourFirstInput;
-import org.processmining.newpackageivy.models.StochasticBpmn;
+import org.processmining.newpackageivy.models.bpmn.stochastic.StochasticBpmn;
 import org.processmining.newpackageivy.models.YourSecondInput;
 import org.processmining.newpackageivy.parameters.YourParameters;
 

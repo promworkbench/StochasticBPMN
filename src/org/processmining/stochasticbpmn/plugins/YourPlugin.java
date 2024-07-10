@@ -14,7 +14,7 @@ import org.processmining.newpackageivy.connections.YourConnection;
 import org.processmining.newpackageivy.dialogs.YourDialog;
 import org.processmining.newpackageivy.help.YourHelp;
 import org.processmining.newpackageivy.models.YourFirstInput;
-import org.processmining.newpackageivy.models.StochasticBpmn;
+import org.processmining.newpackageivy.models.bpmn.stochastic.StochasticBpmn;
 import org.processmining.newpackageivy.models.YourSecondInput;
 import org.processmining.newpackageivy.parameters.YourParameters;
 

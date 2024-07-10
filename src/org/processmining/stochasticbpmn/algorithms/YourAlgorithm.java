@@ -2,7 +2,7 @@ package org.processmining.newpackageivy.algorithms;
 
 import org.processmining.framework.plugin.PluginContext;
 import org.processmining.newpackageivy.models.YourFirstInput;
-import org.processmining.newpackageivy.models.StochasticBpmn;
+import org.processmining.newpackageivy.models.bpmn.stochastic.StochasticBpmn;
 import org.processmining.newpackageivy.models.YourSecondInput;
 import org.processmining.newpackageivy.parameters.YourParameters;
 
@@ -29,7 +29,7 @@ public class YourAlgorithm {
 		parameters.displayMessage("[YourAlgorithm] First input = " + input1.toString());
 		parameters.displayMessage("[YourAlgorithm] Second input = " + input2.toString());
 		parameters.displayMessage("[YourAlgorithm] Parameters = " + parameters.toString());
-	    StochasticBpmn output = parameters.isYourBoolean() ? new StochasticBpmn(input1) : new StochasticBpmn(input2);
+	    StochasticBpmn output = parameters.isYourBoolean() ? new StochasticBpmn() : new StochasticBpmn();
 		time += System.currentTimeMillis();
 		parameters.displayMessage("[YourAlgorithm] Output = " + output.toString());
 		parameters.displayMessage("[YourAlgorithm] End (took " + time/1000.0 + "  seconds).");
