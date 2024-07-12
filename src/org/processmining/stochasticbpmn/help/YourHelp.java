@@ -1,7 +1,7 @@
-package org.processmining.stochasticbpmn.help;
+package org.processmining.newpackageivy.help;
 
 public class YourHelp {
 
 	public final static String TEXT = ""
-			+ "Creates a Your Output, given a YourInput1, a YourInput2, and some parameters.";
+			+ "Creates a Stochastic BPMN Diagram, given a Stochastic BPMN.";
 }

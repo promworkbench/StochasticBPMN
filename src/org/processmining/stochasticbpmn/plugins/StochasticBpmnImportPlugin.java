@@ -21,7 +21,8 @@ import java.io.InputStream;
         returnTypes = {StochasticBpmn.class})
 @UIImportPlugin(
         description = "Stochastic BPMN 2.0 files",
-        extensions = {"bpmn", "xml"})
+        extensions = {"bpmn", "xml"},
+        pack = "StochasticBPMN")
 public class StochasticBpmnImportPlugin extends AbstractImportPlugin {
     public StochasticBpmnImportPlugin() {
     }

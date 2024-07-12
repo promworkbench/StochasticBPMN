@@ -1,19 +1,12 @@
 package org.processmining.newpackageivy.models.bpmn.stochastic;
 
-import org.processmining.newpackageivy.models.bpmn.extensions.BpmnExtensionElement;
 import org.processmining.newpackageivy.models.bpmn.extensions.BpmnExtensionElements;
 import org.processmining.newpackageivy.models.bpmn.stochastic.extension.StochasticBpmnGateDistribution;
-import org.processmining.newpackageivy.models.bpmn.stochastic.extension.StochasticBpmnGateDistributionElement;
-import org.processmining.newpackageivy.models.bpmn.stochastic.extension.StochasticBpmnGatePath;
 import org.processmining.plugins.bpmn.Bpmn;
 import org.processmining.plugins.bpmn.BpmnExclusiveGateway;
-import org.processmining.plugins.bpmn.BpmnOutgoing;
 import org.xmlpull.v1.XmlPullParser;
 
 import java.util.Collections;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class StochasticBpmnExclusiveGateway extends BpmnExclusiveGateway {
     private BpmnExtensionElements extensionElements;
