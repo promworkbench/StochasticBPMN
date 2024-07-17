@@ -4,8 +4,8 @@ import org.processmining.plugins.bpmn.BpmnText;
 
 import java.util.Objects;
 
-public class StochasticBpmnGatePath extends BpmnText {
-    public StochasticBpmnGatePath() {
+public class StochasticBpmnGatewayOutgoing extends BpmnText {
+    public StochasticBpmnGatewayOutgoing() {
         super("outgoing");
     }
 
@@ -14,15 +14,20 @@ public class StochasticBpmnGatePath extends BpmnText {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof StochasticBpmnGatePath)) {
+        if (!(o instanceof StochasticBpmnGatewayOutgoing)) {
             return false;
         }
-        StochasticBpmnGatePath choice = (StochasticBpmnGatePath) o;
+        StochasticBpmnGatewayOutgoing choice = (StochasticBpmnGatewayOutgoing) o;
         return Objects.equals(text, choice.text);
     }
 
     @Override
     public int hashCode() {
         return Objects.hashCode(text);
+    }
+
+    @Override
+    public String toString() {
+        return this.getText();
     }
 }

@@ -1,9 +1,6 @@
 package org.processmining.newpackageivy.models.bpmn.stochastic;
 
-import org.processmining.plugins.bpmn.Bpmn;
-import org.processmining.plugins.bpmn.BpmnExclusiveGateway;
-import org.processmining.plugins.bpmn.BpmnProcess;
-import org.processmining.plugins.bpmn.BpmnSubProcess;
+import org.processmining.plugins.bpmn.*;
 import org.xmlpull.v1.XmlPullParser;
 
 import java.lang.reflect.Field;
@@ -18,7 +15,6 @@ public class StochasticBpmnProcess extends BpmnProcess {
         if (xpp.getName().equals("exclusiveGateway")) {
             BpmnExclusiveGateway exclusiveGateway = new StochasticBpmnExclusiveGateway();
             exclusiveGateway.importElement(xpp, bpmn);
-            System.out.println(exclusiveGateway.tag);
             try {
                 Field field = BpmnProcess.class.getDeclaredField("exclusiveGateways");
                 field.setAccessible(true);
@@ -36,6 +32,18 @@ public class StochasticBpmnProcess extends BpmnProcess {
                 field.setAccessible(true);
                 Collection<BpmnSubProcess> subProcesses = (Collection<BpmnSubProcess>) field.get(this);
                 subProcesses.add(subPro);
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                bpmn.log(this.tag, xpp.getLineNumber(), e.getMessage());
+            }
+            return true;
+        } else if (xpp.getName().equals("sequenceFlow")) {
+            final BpmnSequenceFlow sequenceFlow = new StochasticBpmnSequenceFlow();
+            sequenceFlow.importElement(xpp, bpmn);
+            try {
+                Field field = BpmnProcess.class.getDeclaredField("sequenceFlows");
+                field.setAccessible(true);
+                Collection<BpmnSequenceFlow> sequenceFlows = (Collection<BpmnSequenceFlow>) field.get(this);
+                sequenceFlows.add(sequenceFlow);
             } catch (NoSuchFieldException | IllegalAccessException e) {
                 bpmn.log(this.tag, xpp.getLineNumber(), e.getMessage());
             }

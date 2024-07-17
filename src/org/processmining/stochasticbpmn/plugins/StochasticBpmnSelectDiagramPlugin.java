@@ -5,11 +5,10 @@ import org.processmining.framework.plugin.PluginContext;
 import org.processmining.framework.plugin.annotations.*;
 import org.processmining.models.graphbased.directed.bpmn.BPMNNode;
 import org.processmining.models.graphbased.directed.bpmn.elements.Swimlane;
-import org.processmining.newpackageivy.algorithms.YourAlgorithm;
 import org.processmining.newpackageivy.help.YourHelp;
 import org.processmining.newpackageivy.models.bpmn.stochastic.StochasticBpmn;
-import org.processmining.newpackageivy.models.bpmn.stochastic.diagram.StochasticBPMNDiagram;
-import org.processmining.plugins.bpmn.Bpmn;
+import org.processmining.newpackageivy.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
+import org.processmining.newpackageivy.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagramImpl;
 import org.processmining.plugins.bpmn.parameters.BpmnSelectDiagramParameters;
 
 import java.util.Collection;
@@ -26,17 +25,8 @@ public class StochasticBpmnSelectDiagramPlugin {
      * @param sBpmn   a StochasticBpmn object.
      * @return The output.
      */
-    @UITopiaVariant(
-            affiliation = "RWTH Aachen University",
-            author = "Aleksandar Kuzmanoski, Sandhya Velagapudi",
-            email = "aleksandar.kuzmanoski@rwth-aachen.de, sandhya.velagapudi@rwth-aachen.de",
-            pack = "StochasticBPMN",
-            uiLabel = "Stochastic BPMN, select default diagram",
-            uiHelp = "It selects the first encountered diagram in the bpmn xml schema and produces StochasticBPMNDiagram class.")
-    @PluginVariant(
-            variantLabel = "Generate Stochastic BPMN Diagram from Stochastic BPMN",
-            requiredParameterLabels = {0},
-            help = "It selects the first encountered diagram in the bpmn xml schema and produces Stochastic BPMN Diagram class.")
+    @UITopiaVariant(affiliation = "RWTH Aachen University", author = "Aleksandar Kuzmanoski, Sandhya Velagapudi", email = "aleksandar.kuzmanoski@rwth-aachen.de, sandhya.velagapudi@rwth-aachen.de", pack = "StochasticBPMN", uiLabel = "Stochastic BPMN, select default diagram", uiHelp = "It selects the first encountered diagram in the bpmn xml schema and produces StochasticBPMNDiagram class.")
+    @PluginVariant(variantLabel = "Generate Stochastic BPMN Diagram from Stochastic BPMN", requiredParameterLabels = {0}, help = "It selects the first encountered diagram in the bpmn xml schema and produces Stochastic BPMN Diagram class.")
     public StochasticBPMNDiagram selectDefault(PluginContext context, StochasticBpmn sBpmn) {
         // Apply the algorithm depending on whether a connection already exists.
         BpmnSelectDiagramParameters parameters = new BpmnSelectDiagramParameters();
@@ -49,8 +39,8 @@ public class StochasticBpmnSelectDiagramPlugin {
         return this.selectParameters(context, sBpmn, parameters);
     }
 
-    public StochasticBPMNDiagram selectParameters(PluginContext context, Bpmn bpmn, BpmnSelectDiagramParameters parameters) {
-        StochasticBPMNDiagram newDiagram = new StochasticBPMNDiagram("");
+    public StochasticBPMNDiagram selectParameters(PluginContext context, StochasticBpmn bpmn, BpmnSelectDiagramParameters parameters) {
+        StochasticBPMNDiagram newDiagram = new StochasticBPMNDiagramImpl("");
         Map<String, BPMNNode> id2node = new HashMap<>();
         Map<String, Swimlane> id2lane = new HashMap<>();
         if (parameters.getDiagram() == BpmnSelectDiagramParameters.NODIAGRAM) {

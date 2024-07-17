@@ -1,4 +1,4 @@
-<project name="NewPackage.test" default="check">
+<project name="StochasticBPMN.test" default="check">
 
 	<!-- retrieve basedir of this check script (DO NOT MODIFY) -->
 	<dirname property="test.basedir" file="${ant.file.NewPackage.test}" />

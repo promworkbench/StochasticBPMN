@@ -7,7 +7,7 @@
            xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
            elementFormDefault="qualified">
 
-    <xs:element name="gateDistribution">
+    <xs:element name="gatewayWeights">
         <xs:complexType>
             <xs:sequence>
                 <!--
@@ -19,24 +19,23 @@
                  @To-Do: enforce sum of all elements probabilities to be 1.
                  @To-Do: check whether all elements have unique sets of outgoing sequence flows.
                  -->
-                <xs:element ref="gateDistributionElement" minOccurs="1" maxOccurs="unbounded"/>
+                <xs:element ref="gatewayWeightedElement" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="gateDistributionElement">
+    <xs:element name="gatewayWeightedElement">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="outgoing" type="xs:QName" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="probabilityMass" type="tProbability" default="0"/>
+            <xs:attribute name="weight" type="tWeight" default="0"/>
         </xs:complexType>
     </xs:element>
 
-    <xs:simpleType name="tProbability">
+    <xs:simpleType name="tWeight">
         <xs:restriction base="xs:decimal">
             <xs:minInclusive value="0"/>
-            <xs:maxInclusive value="1"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>

@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions
         xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
-        xmlns:sbmn="http://example.com/bpmn/stochastic"
+        xmlns:sbpmn="http://example.com/bpmn/stochastic"
         xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
         xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
-        xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1u6c2xa" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.22.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0">
+        xmlns:zeebe="http://camunda.org/schema/zeebe/1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+        xmlns:modeler="http://camunda.org/schema/modeler/1.0"
+        id="Definitions_1u6c2xa"
+        targetNamespace="http://bpmn.io/schema/bpmn"
+        exporter="Camunda Modeler"
+        exporterVersion="5.22.0"
+        modeler:executionPlatform="Camunda Cloud"
+        modeler:executionPlatformVersion="8.5.0">
     <bpmn:collaboration id="Collaboration_0rikqp9">
         <bpmn:participant id="Participant_0v4htff" name="Car Insurer" processRef="Process_0tj472p" />
         <bpmn:participant id="Participant_086ejt4" name="Customer" />
@@ -60,14 +69,14 @@
         <bpmn:sequenceFlow id="Flow_1qac4qw" sourceRef="Activity_0uc4zw8" targetRef="Activity_0l6umnw" />
         <bpmn:exclusiveGateway id="Gateway_028r2gc" default="Flow_0i2vvh1">
             <bpmn:extensionElements>
-                <sbmn:gateDistribution>
-                    <sbmn:gateDistributionElement probabilityMass="0.3">
-                        <sbmn:outgoing>Flow_0t4mtsm</sbmn:outgoing>
-                    </sbmn:gateDistributionElement>
-                    <sbmn:gateDistributionElement probabilityMass="0.7">
-                        <sbmn:outgoing>Flow_0i2vvh1</sbmn:outgoing>
-                    </sbmn:gateDistributionElement>
-                </sbmn:gateDistribution>
+                <sbpmn:gatewayWeights>
+                    <sbpmn:gatewayWeightedElement weight="0.3">
+                        <sbpmn:outgoing>Flow_0t4mtsm</sbpmn:outgoing>
+                    </sbpmn:gatewayWeightedElement>
+                    <sbpmn:gatewayWeightedElement weight="0.7">
+                        <sbpmn:outgoing>Flow_0i2vvh1</sbpmn:outgoing>
+                    </sbpmn:gatewayWeightedElement>
+                </sbpmn:gatewayWeights>
             </bpmn:extensionElements>
             <bpmn:incoming>Flow_0lzrirf</bpmn:incoming>
             <bpmn:outgoing>Flow_0t4mtsm</bpmn:outgoing>

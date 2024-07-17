@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gateDistribution xmlns="http://example.com/bpmn/stochastic">
-    <gateDistributionElement probabilityMass="0.3">
+<gatewayWeights xmlns="http://example.com/bpmn/stochastic">
+    <gatewayWeightedElement weight="0.3">
         <outgoing>Acko</outgoing>
-    </gateDistributionElement>
-    <gateDistributionElement probabilityMass="0.7">
+    </gatewayWeightedElement>
+    <gatewayWeightedElement weight="0.7">
         <outgoing>Viki</outgoing>
-    </gateDistributionElement>
-</gateDistribution>
+    </gatewayWeightedElement>
+</gatewayWeights>
