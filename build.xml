@@ -10,22 +10,23 @@
 	<property name="version" value="${env.major_minor}.${env.GITHUB_RUN_NUMBER}" />
 	<property name="project" value="StochasticBPMN" />
 
-	<property name="author" value="A. Kuzmanoski, S. Velagapudi" />
+	<property name="author" value="Aleksandar Kuzmanoski, Sandhya Velagapudi" />
 	<property name="organization" value="RWTH Aachen University" />
-	<property name="description" value="Stochastic BPMN" />
+	<property name="description" value="StochasticBPMN" />
 	<!-- See https://svn.win.tue.nl/trac/prom/browser/Packages/ProM-Contexts/Trunk/src/org/processmining/contexts/uitopia/packagemanager/PMPackageView.java for a list of known licenses. -->
 	<property name="license" value="GPL" />
 	<property name="logo" value="prom_subtitle_hat_300.png" />
 
 	<property name="ivy.lib.dir" value="ivy" />
-	<!--property name="ivy.cache.dir" value="/var/lib/hudson/.ivy2/cache/${env.EXECUTOR_NUMBER}" /-->
+<!--	<property name="ivy.cache.dir" value="/var/lib/hudson/.ivy2/cache/${env.EXECUTOR_NUMBER}" />-->
 
 	<!-- Set the os to win32, win64, lin32, lin64, mac, or all -->
 	<property name="os" value="all" />
 
+
 	<property name="ivy.install.version" value="2.1.0-rc2" />
 	<condition property="ivy.home" value="${env.IVY_HOME}">
-	    <isset property="env.IVY_HOME" />
+		<isset property="env.IVY_HOME" />
 	</condition>
 	<property name="ivy.home" value="${user.home}/.ant" />
 	<property name="ivy.jar.dir" value="${ivy.home}/lib" />
@@ -35,7 +36,7 @@
 
 	    <mkdir dir="${ivy.jar.dir}"/>
 	    <!-- download Ivy from web site so that it can be used even without any special installation -->
-	    <get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar" 
+	    <get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar"
 	         dest="${ivy.jar.file}" usetimestamp="true"/>
 	</target>
 
@@ -51,7 +52,7 @@
 	    <taskdef resource="org/apache/ivy/ant/antlib.xml"
 	             uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path" />
 	</target>
-	
+
 	<!-- Compilation macro
 		 This Macro compiles the sources is one ${src}-... folder.
 	 The sources are compiled into the ${build} folder.
@@ -119,7 +120,7 @@
 		<delete dir="${build}" />
 		<delete dir="${dist}" />
 	</target>
-	
+
 	<target name="resolve" depends="init-ivy">
 		<ivy:retrieve type="jar,bundle" sync="true" haltonfailure="false" />
 		<!--ivy:retrieve pattern="lib/[artifact]-[revision].[ext]" conf="lib" type="jar,bundle" sync="true" /-->
@@ -134,20 +135,20 @@
 			</fileset>
 		</javadoc>
 	</target>
-	
+
 	<target name="compile">
 		<echo message="[build] Compiling the sources" />
 		<mkdir dir="${build}" />
 		<mkdir dir="${dist}" />
 		<compile />
 	</target>
-		
+
 	<target name="makejar">
 		<echo message="[build] Creating jar" />
 		<tstamp />
 		<makejar />
 	</target>
-		
+
 	<target name="archive">
 		<echo message="[build] Packaging the project" />
 		<sequential>
@@ -190,20 +191,20 @@
 			<replace file="${release}/ivy.xml" token="VERSION" value="${version}" />
 		</sequential>
 	</target>
-	
+
 	<!-- Target to use to build the project on Hudson -->
 	<target name="buildHudson" depends="clean,resolve,javadoc,compile,makejar,archive" />
-	
+
 	<!-- Target to use to prepare for a downstream build -->
 	<!-- The upstream changes will be copied in following this target -->
 	<target name="prepareDownstream" depends="clean,resolve" />
-	
+
 	<!-- Target to use to do the downstram build -->
 	<!-- The upstream changes will be copied in preceding this target -->
 	<target name="buildDownstream" depends="compile" />
-	
+
 	<!-- Targets for sake of backwards compatibility -->
-	
+
 	<!-- clean all binaries and distributions -->
 	<target name="Clean build and dist folders" description="clean up" id="1" depends="clean" />
 
@@ -216,5 +217,3 @@
 	<target name="Compile Sources" depends="resolve,compile,makejar" />
 
 </project>
-
-
