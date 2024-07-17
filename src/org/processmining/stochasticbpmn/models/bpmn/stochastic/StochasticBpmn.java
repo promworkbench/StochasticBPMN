@@ -1,4 +1,4 @@
-package org.processmining.newpackageivy.models.bpmn.stochastic;
+package org.processmining.stochasticbpmn.models.bpmn.stochastic;
 
 
 import org.processmining.plugins.bpmn.Bpmn;

@@ -1,18 +1,18 @@
-package org.processmining.newpackageivy.models.bpmn.stochastic;
+package org.processmining.stochasticbpmn.models.bpmn.stochastic;
 
 import org.processmining.models.graphbased.directed.bpmn.BPMNDiagram;
 import org.processmining.models.graphbased.directed.bpmn.BPMNNode;
 import org.processmining.models.graphbased.directed.bpmn.elements.Gateway;
 import org.processmining.models.graphbased.directed.bpmn.elements.SubProcess;
 import org.processmining.models.graphbased.directed.bpmn.elements.Swimlane;
-import org.processmining.newpackageivy.models.bpmn.extensions.BpmnExtensionElement;
-import org.processmining.newpackageivy.models.bpmn.extensions.BpmnExtensionElements;
-import org.processmining.newpackageivy.models.bpmn.stochastic.extension.StochasticBpmnGatewayOutgoing;
-import org.processmining.newpackageivy.models.bpmn.stochastic.extension.StochasticBpmnGatewayWeightedElement;
-import org.processmining.newpackageivy.models.bpmn.stochastic.extension.StochasticBpmnGatewayWeights;
-import org.processmining.newpackageivy.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
-import org.processmining.newpackageivy.models.graphbased.directed.bpmn.stochastic.StochasticGateway;
-import org.processmining.newpackageivy.models.graphbased.directed.bpmn.stochastic.StochasticGatewayWeightedFlow;
+import org.processmining.stochasticbpmn.models.bpmn.extensions.BpmnExtensionElement;
+import org.processmining.stochasticbpmn.models.bpmn.extensions.BpmnExtensionElements;
+import org.processmining.stochasticbpmn.models.bpmn.stochastic.extension.StochasticBpmnGatewayOutgoing;
+import org.processmining.stochasticbpmn.models.bpmn.stochastic.extension.StochasticBpmnGatewayWeightedElement;
+import org.processmining.stochasticbpmn.models.bpmn.stochastic.extension.StochasticBpmnGatewayWeights;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGateway;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGatewayWeightedFlow;
 import org.processmining.plugins.bpmn.Bpmn;
 import org.processmining.plugins.bpmn.BpmnExclusiveGateway;
 import org.processmining.plugins.bpmn.BpmnOutgoing;

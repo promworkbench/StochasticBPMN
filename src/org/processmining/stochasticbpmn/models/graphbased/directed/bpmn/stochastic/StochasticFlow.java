@@ -1,4 +1,4 @@
-package org.processmining.newpackageivy.models.graphbased.directed.bpmn.stochastic;
+package org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic;
 
 import org.processmining.models.graphbased.directed.bpmn.BPMNNode;
 import org.processmining.models.graphbased.directed.bpmn.elements.Flow;

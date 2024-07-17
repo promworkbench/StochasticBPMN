@@ -1,4 +1,4 @@
-package org.processmining.newpackageivy.plugins;
+package org.processmining.stochasticbpmn.plugins;
 
 import org.deckfour.xes.model.XLog;
 import org.processmining.contexts.uitopia.annotations.UIImportPlugin;
@@ -6,8 +6,7 @@ import org.processmining.framework.abstractplugins.AbstractImportPlugin;
 import org.processmining.framework.plugin.PluginContext;
 import org.processmining.framework.plugin.annotations.Plugin;
 import org.processmining.framework.plugin.annotations.PluginLevel;
-import org.processmining.newpackageivy.models.bpmn.stochastic.StochasticBpmn;
-import org.processmining.plugins.bpmn.Bpmn;
+import org.processmining.stochasticbpmn.models.bpmn.stochastic.StochasticBpmn;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 

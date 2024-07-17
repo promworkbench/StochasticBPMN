@@ -1,10 +1,10 @@
-package org.processmining.newpackageivy.algorithms;
+package org.processmining.stochasticbpmn.algorithms;
 
 import org.processmining.framework.plugin.PluginContext;
-import org.processmining.newpackageivy.models.YourFirstInput;
-import org.processmining.newpackageivy.models.bpmn.stochastic.StochasticBpmn;
-import org.processmining.newpackageivy.models.YourSecondInput;
-import org.processmining.newpackageivy.parameters.YourParameters;
+import org.processmining.stochasticbpmn.models.YourFirstInput;
+import org.processmining.stochasticbpmn.models.bpmn.stochastic.StochasticBpmn;
+import org.processmining.stochasticbpmn.models.YourSecondInput;
+import org.processmining.stochasticbpmn.parameters.YourParameters;
 
 public class YourAlgorithm {
 

@@ -1,4 +1,4 @@
-package org.processmining.newpackageivy.models.bpmn.stochastic.extension;
+package org.processmining.stochasticbpmn.models.bpmn.stochastic.extension;
 
 import org.processmining.plugins.bpmn.BpmnText;
 

@@ -1,6 +1,6 @@
-package org.processmining.newpackageivy.models.bpmn.stochastic.extension;
+package org.processmining.stochasticbpmn.models.bpmn.stochastic.extension;
 
-import org.processmining.newpackageivy.models.bpmn.extensions.BpmnExtensionElement;
+import org.processmining.stochasticbpmn.models.bpmn.extensions.BpmnExtensionElement;
 import org.processmining.plugins.bpmn.Bpmn;
 import org.xmlpull.v1.XmlPullParser;
 

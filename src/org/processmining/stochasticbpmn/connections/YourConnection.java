@@ -1,10 +1,10 @@
-package org.processmining.newpackageivy.connections;
+package org.processmining.stochasticbpmn.connections;
 
 import org.processmining.framework.connections.impl.AbstractConnection;
-import org.processmining.newpackageivy.models.YourFirstInput;
-import org.processmining.newpackageivy.models.bpmn.stochastic.StochasticBpmn;
-import org.processmining.newpackageivy.models.YourSecondInput;
-import org.processmining.newpackageivy.parameters.YourParameters;
+import org.processmining.stochasticbpmn.models.YourFirstInput;
+import org.processmining.stochasticbpmn.models.bpmn.stochastic.StochasticBpmn;
+import org.processmining.stochasticbpmn.models.YourSecondInput;
+import org.processmining.stochasticbpmn.parameters.YourParameters;
 
 public class YourConnection extends AbstractConnection {
 

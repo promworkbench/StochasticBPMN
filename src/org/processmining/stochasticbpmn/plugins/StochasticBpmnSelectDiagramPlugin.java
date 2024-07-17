@@ -1,14 +1,14 @@
-package org.processmining.newpackageivy.plugins;
+package org.processmining.stochasticbpmn.plugins;
 
 import org.processmining.contexts.uitopia.annotations.UITopiaVariant;
 import org.processmining.framework.plugin.PluginContext;
 import org.processmining.framework.plugin.annotations.*;
 import org.processmining.models.graphbased.directed.bpmn.BPMNNode;
 import org.processmining.models.graphbased.directed.bpmn.elements.Swimlane;
-import org.processmining.newpackageivy.help.YourHelp;
-import org.processmining.newpackageivy.models.bpmn.stochastic.StochasticBpmn;
-import org.processmining.newpackageivy.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
-import org.processmining.newpackageivy.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagramImpl;
+import org.processmining.stochasticbpmn.help.YourHelp;
+import org.processmining.stochasticbpmn.models.bpmn.stochastic.StochasticBpmn;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagramImpl;
 import org.processmining.plugins.bpmn.parameters.BpmnSelectDiagramParameters;
 
 import java.util.Collection;

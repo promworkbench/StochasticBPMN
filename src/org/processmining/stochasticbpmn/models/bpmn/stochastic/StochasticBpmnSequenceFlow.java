@@ -1,11 +1,11 @@
-package org.processmining.newpackageivy.models.bpmn.stochastic;
+package org.processmining.stochasticbpmn.models.bpmn.stochastic;
 
 import org.processmining.models.graphbased.directed.bpmn.BPMNDiagram;
 import org.processmining.models.graphbased.directed.bpmn.BPMNNode;
 import org.processmining.models.graphbased.directed.bpmn.elements.Flow;
-import org.processmining.newpackageivy.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
-import org.processmining.newpackageivy.models.graphbased.directed.bpmn.stochastic.StochasticFlow;
-import org.processmining.newpackageivy.models.graphbased.directed.bpmn.stochastic.StochasticGateway;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticFlow;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGateway;
 import org.processmining.plugins.bpmn.BpmnSequenceFlow;
 
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package org.processmining.newpackageivy.models.graphbased.directed.bpmn.stochastic;
+package org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic;
 
 import java.util.HashMap;
 import java.util.Map;

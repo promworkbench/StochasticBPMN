@@ -3,6 +3,12 @@
 StochasticBPMN.iml
 /bin
 
+/dist
+
+/bindist
+
+/ivy
+
 # Bild
 
 # Compiled class file
