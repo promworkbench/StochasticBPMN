@@ -20,7 +20,7 @@ public class StochasticBPMNDiagramReader implements ObjectReader<InputStream, St
     }
 
     @Override
-    public StochasticBPMNDiagram read(InputStream inputStream) throws IOException, XmlPullParserException {
+    public StochasticBPMNDiagram read(InputStream inputStream) throws Exception {
         StochasticBpmn sbpmn = sbpmnReader.read(inputStream);
         return diagramBuilder.build(sbpmn);
     }

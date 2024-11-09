@@ -10,7 +10,7 @@ import java.io.InputStream;
 
 public class StochasticBPMNInputStreamReader implements StochasticBPMNReader {
     @Override
-    public StochasticBpmn read(InputStream input) throws XmlPullParserException, IOException {
+    public StochasticBpmn read(InputStream input) throws Exception {
         XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
         factory.setNamespaceAware(true);
         XmlPullParser xpp = factory.newPullParser();

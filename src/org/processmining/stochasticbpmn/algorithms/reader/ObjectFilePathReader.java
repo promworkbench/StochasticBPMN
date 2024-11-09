@@ -15,7 +15,7 @@ public class ObjectFilePathReader<OUTPUT> implements ObjectReader<String, OUTPUT
     }
 
     @Override
-    public OUTPUT read(String filename) throws IOException, XmlPullParserException {
+    public OUTPUT read(String filename) throws Exception {
         final File file = new File(filename);
         return reader.read(Files.newInputStream(file.toPath()));
     }

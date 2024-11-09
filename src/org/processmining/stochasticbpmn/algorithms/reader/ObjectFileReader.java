@@ -16,7 +16,7 @@ public class ObjectFileReader<OUTPUT> implements ObjectReader<File, OUTPUT> {
     }
 
     @Override
-    public OUTPUT read(File file) throws IOException, XmlPullParserException {
+    public OUTPUT read(File file) throws Exception {
         return reader.read(Files.newInputStream(file.toPath()));
     }
 }

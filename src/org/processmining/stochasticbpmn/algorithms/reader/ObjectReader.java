@@ -5,5 +5,5 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 
 public interface ObjectReader<INPUT, OUTPUT> {
-    OUTPUT read(final INPUT input) throws IOException, XmlPullParserException;
+    OUTPUT read(final INPUT input) throws Exception;
 }

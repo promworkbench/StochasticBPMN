@@ -7,5 +7,5 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public interface StochasticBPMNReader extends ObjectReader<InputStream, StochasticBpmn> {
-    StochasticBpmn read(final InputStream input) throws XmlPullParserException, IOException;
+    StochasticBpmn read(final InputStream input) throws Exception;
 }
