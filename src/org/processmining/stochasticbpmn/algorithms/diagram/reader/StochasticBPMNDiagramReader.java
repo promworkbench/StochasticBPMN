@@ -5,9 +5,7 @@ import org.processmining.stochasticbpmn.algorithms.reader.ObjectReader;
 import org.processmining.stochasticbpmn.algorithms.reader.StochasticBPMNReader;
 import org.processmining.stochasticbpmn.models.bpmn.stochastic.StochasticBpmn;
 import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
-import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 public class StochasticBPMNDiagramReader implements ObjectReader<InputStream, StochasticBPMNDiagram> {

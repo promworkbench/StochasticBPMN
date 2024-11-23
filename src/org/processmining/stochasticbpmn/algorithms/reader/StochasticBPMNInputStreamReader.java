@@ -24,7 +24,6 @@ public class StochasticBPMNInputStreamReader implements StochasticBPMNReader {
 
         if (xpp.getName().equals(bpmn.tag)) {
             bpmn.importElement(xpp, bpmn);
-            System.out.println(bpmn.tag);
         } else {
             bpmn.log(bpmn.tag, xpp.getLineNumber(), "Expected " + bpmn.tag + ", got " + xpp.getName());
         }

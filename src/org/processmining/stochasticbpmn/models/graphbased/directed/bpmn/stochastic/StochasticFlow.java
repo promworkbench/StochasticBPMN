@@ -6,6 +6,7 @@ import org.processmining.models.graphbased.directed.bpmn.elements.Flow;
 public class StochasticFlow extends Flow {
     public StochasticFlow(BPMNNode source, BPMNNode target, String label) {
         super(source, target, label);
+//        setLabel(getLabel());
     }
 
     private StochasticGateway getStochasticGateway() {
@@ -24,5 +25,10 @@ public class StochasticFlow extends Flow {
     public double getWeight() {
         final StochasticGateway gateway = getStochasticGateway();
         return gateway.getWeight(this.getAttributeMap().get("Original id").toString());
+    }
+
+    @Override
+    public String getLabel() {
+        return getWeight() + ": " + super.getLabel();
     }
 }

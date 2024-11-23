@@ -23,6 +23,7 @@ public class StochasticBpmnSequenceFlow extends BpmnSequenceFlow {
             final StochasticFlow flow = sDiagram.addStochasticFlow(sourceNode, id2node.get(this.targetRef), this.name);
             flow.getAttributeMap().put("Original id", this.id);
             flow.setConditionExpression(this.getConditionExpression());
+            flow.setLabel(flow.getLabel());
             id2node.put(this.id, flow.getTarget());
             return flow;
         } else {
