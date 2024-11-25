@@ -1,8 +1,6 @@
 package org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class StochasticGatewayWeightedFlow {
     private final Map<StochasticGatewayFlowSet, Double> weightedElements;
@@ -32,6 +30,10 @@ public class StochasticGatewayWeightedFlow {
         return this.getFlowWeight(new StochasticGatewayFlowSet(flowSet));
     }
 
+    public Double getFlowWeight(final Collection<String> flows) {
+        return this.getFlowWeight(new StochasticGatewayFlowSet(flows));
+    }
+
     public Double getFlowProbability(final StochasticGatewayFlowSet flowSet) {
         if (totalWeight == 0.0) {
             return 0.0;
@@ -41,5 +43,9 @@ public class StochasticGatewayWeightedFlow {
 
     public Double getFlowProbability(final String ...flowSet) {
         return this.getFlowProbability(new StochasticGatewayFlowSet(flowSet));
+    }
+
+    public Double getFlowProbability(final Collection<String> flows) {
+        return this.getFlowProbability(new StochasticGatewayFlowSet(flows));
     }
 }

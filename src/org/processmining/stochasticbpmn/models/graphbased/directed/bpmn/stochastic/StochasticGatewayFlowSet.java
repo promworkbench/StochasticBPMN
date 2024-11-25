@@ -1,9 +1,6 @@
 package org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class StochasticGatewayFlowSet {
@@ -11,6 +8,10 @@ public class StochasticGatewayFlowSet {
 
     public StochasticGatewayFlowSet(String... flows) {
         this.flows = Arrays.stream(flows).collect(Collectors.toSet());
+    }
+
+    public StochasticGatewayFlowSet(Collection<String> flows) {
+        this.flows = new HashSet<>(flows);
     }
 
     public Collection<String> getFlows() {
