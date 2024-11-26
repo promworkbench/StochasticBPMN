@@ -2,8 +2,12 @@ package org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochas
 
 import org.processmining.models.graphbased.directed.bpmn.BPMNNode;
 import org.processmining.models.graphbased.directed.bpmn.elements.Flow;
+import org.processmining.stochasticbpmn.models.stochastic.Probability;
+import org.processmining.stochasticbpmn.models.stochastic.StochasticObject;
 
-public class StochasticFlow extends Flow {
+import java.math.BigDecimal;
+
+public class StochasticFlow extends Flow implements StochasticObject {
     public StochasticFlow(BPMNNode source, BPMNNode target, String label) {
         super(source, target, label);
     }
@@ -15,13 +19,12 @@ public class StochasticFlow extends Flow {
         return (StochasticGateway) this.source;
     }
 
-    public double getProbability() {
+    public Probability getProbability() {
         final StochasticGateway gateway = getStochasticGateway();
         return gateway.getProbability(this);
     }
 
-
-    public double getWeight() {
+    public BigDecimal getWeight() {
         final StochasticGateway gateway = getStochasticGateway();
         return gateway.getWeight(this);
     }

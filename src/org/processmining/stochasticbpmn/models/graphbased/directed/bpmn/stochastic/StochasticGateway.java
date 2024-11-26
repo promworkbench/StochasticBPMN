@@ -6,7 +6,9 @@ import org.processmining.models.graphbased.directed.bpmn.BPMNNode;
 import org.processmining.models.graphbased.directed.bpmn.elements.Gateway;
 import org.processmining.models.graphbased.directed.bpmn.elements.SubProcess;
 import org.processmining.models.graphbased.directed.bpmn.elements.Swimlane;
+import org.processmining.stochasticbpmn.models.stochastic.Probability;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -30,19 +32,19 @@ public class StochasticGateway extends Gateway {
         this.weightedFlow = weightedFlow;
     }
 
-    public double getWeight(final Collection<BPMNEdge<? extends BPMNNode, ? extends BPMNNode>> outgoingEdges) {
+    public BigDecimal getWeight(final Collection<BPMNEdge<? extends BPMNNode, ? extends BPMNNode>> outgoingEdges) {
         return this.weightedFlow.getFlowWeight(outgoingEdges.stream().map(this::getEdgeId).collect(Collectors.toList()));
     }
 
-    public double getWeight(BPMNEdge<? extends BPMNNode, ? extends BPMNNode> outgoingEdge) {
+    public BigDecimal getWeight(BPMNEdge<? extends BPMNNode, ? extends BPMNNode> outgoingEdge) {
         return weightedFlow.getFlowWeight(getEdgeId(outgoingEdge));
     }
 
-    public double getProbability(BPMNEdge<? extends BPMNNode, ? extends BPMNNode> outgoingEdge) {
+    public Probability getProbability(BPMNEdge<? extends BPMNNode, ? extends BPMNNode> outgoingEdge) {
         return weightedFlow.getFlowProbability(getEdgeId(outgoingEdge));
     }
 
-    public double getProbability(final Collection<BPMNEdge<? extends BPMNNode, ? extends BPMNNode>> outgoingEdges) {
+    public Probability getProbability(final Collection<BPMNEdge<? extends BPMNNode, ? extends BPMNNode>> outgoingEdges) {
         return this.weightedFlow.getFlowProbability(outgoingEdges.stream().map(this::getEdgeId).collect(Collectors.toList()));
     }
 

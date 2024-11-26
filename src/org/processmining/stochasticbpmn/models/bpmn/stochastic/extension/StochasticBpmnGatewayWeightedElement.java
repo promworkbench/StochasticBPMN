@@ -4,19 +4,20 @@ import org.processmining.plugins.bpmn.Bpmn;
 import org.processmining.plugins.bpmn.BpmnElement;
 import org.xmlpull.v1.XmlPullParser;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 
 public class StochasticBpmnGatewayWeightedElement extends BpmnElement {
-    private double weight;
+    private BigDecimal weight;
 
     private final Collection<StochasticBpmnGatewayOutgoing> outgoingFlow;
 
     public StochasticBpmnGatewayWeightedElement() {
         super("gatewayWeightedElement");
         this.outgoingFlow = new HashSet<>();
-        this.weight = 0.0;
+        this.weight = BigDecimal.ZERO;
     }
 
     @Override
@@ -36,11 +37,11 @@ public class StochasticBpmnGatewayWeightedElement extends BpmnElement {
         super.importAttributes(xpp, bpmn);
         String value = xpp.getAttributeValue(null, "weight");
         if (value != null) {
-            this.weight = Double.parseDouble(value);
+            this.weight = new BigDecimal(value);
         }
     }
 
-    public double getWeight() {
+    public BigDecimal getWeight() {
         return weight;
     }
 
