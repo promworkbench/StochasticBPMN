@@ -72,20 +72,20 @@ public class Probability extends Number implements Comparable<Probability> {
      * Throws an exception for division by zero or out-of-bound results.
      */
     public Probability divide(Probability other) {
-        return Probability.of(this.value.divide(other.value, 30, RoundingMode.DOWN));
+        return divide(other, RoundingMode.DOWN);
     }
 
     public Probability divide(Probability other, int scale, RoundingMode roundingMode) {
-        return Probability.of(this.value.divide(other.value, scale, roundingMode));
+        return Probability.of(this.value.divide(other.value, scale, roundingMode).stripTrailingZeros());
     }
 
     public Probability divide(Probability other, RoundingMode roundingMode) {
-        return Probability.of(this.value.divide(other.value, roundingMode));
+        return divide(other, 30, RoundingMode.DOWN);
     }
 
     @Override
     public String toString() {
-        return "Probability{" + "value=" + value + '}';
+        return value.toString();
     }
 
     @Override

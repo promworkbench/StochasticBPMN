@@ -42,7 +42,7 @@ public class StochasticGatewayWeightedFlow {
         if (BigDecimal.ZERO.equals(totalWeight)) {
             return Probability.ZERO;
         }
-        return Probability.of(weightedElements.getOrDefault(flowSet, BigDecimal.ZERO).divide(totalWeight, 30, RoundingMode.DOWN));
+        return Probability.of(weightedElements.getOrDefault(flowSet, BigDecimal.ZERO).divide(totalWeight, 30, RoundingMode.DOWN).stripTrailingZeros());
     }
 
     public Probability getFlowProbability(final String ...flowSet) {
