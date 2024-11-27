@@ -5,6 +5,10 @@ import org.processmining.plugins.bpmn.Bpmn;
 import org.processmining.plugins.bpmn.parameters.BpmnSelectDiagramParameters;
 
 public interface BpmnDiagramBuilder {
+    static BpmnDiagramBuilder getInstance() {
+        return new BpmnDiagramBuilderImpl();
+    }
+
     BPMNDiagram build(final Bpmn bpmn, final BpmnSelectDiagramParameters parameters);
 
     BPMNDiagram build(final Bpmn bpmn);

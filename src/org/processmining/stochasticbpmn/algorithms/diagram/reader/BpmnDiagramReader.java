@@ -4,8 +4,11 @@ import org.processmining.models.graphbased.directed.bpmn.BPMNDiagram;
 import org.processmining.plugins.bpmn.Bpmn;
 import org.processmining.stochasticbpmn.algorithms.diagram.builder.BpmnDiagramBuilder;
 import org.processmining.stochasticbpmn.algorithms.reader.BpmnReader;
+import org.processmining.stochasticbpmn.algorithms.reader.ObjectFilePathReader;
+import org.processmining.stochasticbpmn.algorithms.reader.ObjectFileReader;
 import org.processmining.stochasticbpmn.algorithms.reader.ObjectReader;
 
+import java.io.File;
 import java.io.InputStream;
 
 public class BpmnDiagramReader implements ObjectReader<InputStream, BPMNDiagram> {
@@ -15,6 +18,18 @@ public class BpmnDiagramReader implements ObjectReader<InputStream, BPMNDiagram>
     public BpmnDiagramReader(BpmnReader bpmnReader, BpmnDiagramBuilder diagramBuilder) {
         this.bpmnReader = bpmnReader;
         this.diagramBuilder = diagramBuilder;
+    }
+
+    static BpmnDiagramReader fromInputStream() {
+        return new BpmnDiagramReader(BpmnReader.fromInputStream(), BpmnDiagramBuilder.getInstance());
+    }
+
+    static ObjectReader<File, BPMNDiagram> fromFile() {
+        return new ObjectFileReader<>(fromInputStream());
+    }
+
+    static ObjectReader<String, BPMNDiagram> fromFileName() {
+        return new ObjectFilePathReader<>(fromInputStream());
     }
 
     @Override

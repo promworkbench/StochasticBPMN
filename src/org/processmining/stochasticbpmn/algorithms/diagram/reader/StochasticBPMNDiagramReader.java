@@ -1,16 +1,29 @@
 package org.processmining.stochasticbpmn.algorithms.diagram.reader;
 
 import org.processmining.stochasticbpmn.algorithms.diagram.builder.StochasticBPMNDiagramBuilder;
-import org.processmining.stochasticbpmn.algorithms.reader.ObjectReader;
-import org.processmining.stochasticbpmn.algorithms.reader.StochasticBPMNReader;
+import org.processmining.stochasticbpmn.algorithms.reader.*;
 import org.processmining.stochasticbpmn.models.bpmn.stochastic.StochasticBpmn;
 import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
 
+import java.io.File;
 import java.io.InputStream;
 
 public class StochasticBPMNDiagramReader implements ObjectReader<InputStream, StochasticBPMNDiagram> {
     private final StochasticBPMNReader sbpmnReader;
     private final StochasticBPMNDiagramBuilder diagramBuilder;
+
+    static StochasticBPMNDiagramReader fromInputStream() {
+        return new StochasticBPMNDiagramReader(StochasticBPMNReader.fromInputStream(),
+                StochasticBPMNDiagramBuilder.getInstance());
+    }
+
+    static ObjectReader<File, StochasticBPMNDiagram> fromFile() {
+        return new ObjectFileReader<>(fromInputStream());
+    }
+
+    static ObjectReader<String, StochasticBPMNDiagram> fromFileName() {
+        return new ObjectFilePathReader<>(fromInputStream());
+    }
 
     public StochasticBPMNDiagramReader(StochasticBPMNReader sbpmnReader, StochasticBPMNDiagramBuilder diagramBuilder) {
         this.sbpmnReader = sbpmnReader;

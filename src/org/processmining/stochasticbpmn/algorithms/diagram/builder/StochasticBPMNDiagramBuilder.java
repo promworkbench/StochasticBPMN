@@ -5,6 +5,10 @@ import org.processmining.stochasticbpmn.models.bpmn.stochastic.StochasticBpmn;
 import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
 
 public interface StochasticBPMNDiagramBuilder {
+    static StochasticBPMNDiagramBuilder getInstance() {
+        return new StochasticBPMNDiagramBuilderImpl();
+    }
+
     StochasticBPMNDiagram build(final StochasticBpmn bpmn, final BpmnSelectDiagramParameters parameters);
 
     StochasticBPMNDiagram build(final StochasticBpmn bpmn);
