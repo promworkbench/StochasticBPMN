@@ -12,16 +12,16 @@ public class StochasticBPMNDiagramReader implements ObjectReader<InputStream, St
     private final StochasticBPMNReader sbpmnReader;
     private final StochasticBPMNDiagramBuilder diagramBuilder;
 
-    static StochasticBPMNDiagramReader fromInputStream() {
+    public static StochasticBPMNDiagramReader fromInputStream() {
         return new StochasticBPMNDiagramReader(StochasticBPMNReader.fromInputStream(),
                 StochasticBPMNDiagramBuilder.getInstance());
     }
 
-    static ObjectReader<File, StochasticBPMNDiagram> fromFile() {
+    public static ObjectReader<File, StochasticBPMNDiagram> fromFile() {
         return new ObjectFileReader<>(fromInputStream());
     }
 
-    static ObjectReader<String, StochasticBPMNDiagram> fromFileName() {
+    public static ObjectReader<String, StochasticBPMNDiagram> fromFileName() {
         return new ObjectFilePathReader<>(fromInputStream());
     }
 

@@ -20,15 +20,15 @@ public class BpmnDiagramReader implements ObjectReader<InputStream, BPMNDiagram>
         this.diagramBuilder = diagramBuilder;
     }
 
-    static BpmnDiagramReader fromInputStream() {
+    public static BpmnDiagramReader fromInputStream() {
         return new BpmnDiagramReader(BpmnReader.fromInputStream(), BpmnDiagramBuilder.getInstance());
     }
 
-    static ObjectReader<File, BPMNDiagram> fromFile() {
+    public static ObjectReader<File, BPMNDiagram> fromFile() {
         return new ObjectFileReader<>(fromInputStream());
     }
 
-    static ObjectReader<String, BPMNDiagram> fromFileName() {
+    public static ObjectReader<String, BPMNDiagram> fromFileName() {
         return new ObjectFilePathReader<>(fromInputStream());
     }
 
