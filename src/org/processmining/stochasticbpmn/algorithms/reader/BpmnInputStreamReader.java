@@ -9,6 +9,11 @@ import java.io.InputStream;
 public class BpmnInputStreamReader implements BpmnReader {
     @Override
     public Bpmn read(InputStream input) throws Exception {
+        return read(input, "");
+    }
+
+    @Override
+    public Bpmn read(InputStream input, String label) throws Exception {
         XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
         factory.setNamespaceAware(true);
         XmlPullParser xpp = factory.newPullParser();

@@ -9,7 +9,8 @@ public interface StochasticBPMNDiagramBuilder {
         return new StochasticBPMNDiagramBuilderImpl();
     }
 
-    StochasticBPMNDiagram build(final StochasticBpmn bpmn, final BpmnSelectDiagramParameters parameters);
+    StochasticBPMNDiagram build(final StochasticBpmn bpmn,
+                                final String label, final BpmnSelectDiagramParameters parameters);
 
-    StochasticBPMNDiagram build(final StochasticBpmn bpmn);
+    StochasticBPMNDiagram build(final StochasticBpmn bpmn, final String label);
 }

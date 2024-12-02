@@ -15,7 +15,7 @@ public interface BpmnReader extends ObjectReader<InputStream, Bpmn> {
     }
 
     static ObjectReader<String, Bpmn> fromFileName() {
-        return new ObjectFilePathReader<>(fromInputStream());
+        return new ObjectFilePathReader<>(fromFile());
     }
 
     Bpmn read(final InputStream input) throws Exception;

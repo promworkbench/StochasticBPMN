@@ -6,4 +6,6 @@ import java.io.IOException;
 
 public interface ObjectReader<INPUT, OUTPUT> {
     OUTPUT read(final INPUT input) throws Exception;
+
+    OUTPUT read(final INPUT input, String label) throws Exception;
 }

@@ -8,15 +8,20 @@ import java.io.InputStream;
 import java.nio.file.Files;
 
 public class ObjectFilePathReader<OUTPUT> implements ObjectReader<String, OUTPUT> {
-    private final ObjectReader<InputStream, OUTPUT> reader;
+    private final ObjectReader<File, OUTPUT> reader;
 
-    public ObjectFilePathReader(ObjectReader<InputStream, OUTPUT> reader) {
+    public ObjectFilePathReader(ObjectReader<File, OUTPUT> reader) {
         this.reader = reader;
     }
 
     @Override
     public OUTPUT read(String filename) throws Exception {
         final File file = new File(filename);
-        return reader.read(Files.newInputStream(file.toPath()));
+        return reader.read(file);
+    }
+
+    @Override
+    public OUTPUT read(String s, String label) throws Exception {
+        return reader.read(new File(s), label);
     }
 }

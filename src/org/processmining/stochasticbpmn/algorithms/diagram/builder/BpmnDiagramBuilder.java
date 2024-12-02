@@ -9,7 +9,7 @@ public interface BpmnDiagramBuilder {
         return new BpmnDiagramBuilderImpl();
     }
 
-    BPMNDiagram build(final Bpmn bpmn, final BpmnSelectDiagramParameters parameters);
+    BPMNDiagram build(final Bpmn bpmn, String label, final BpmnSelectDiagramParameters parameters);
 
-    BPMNDiagram build(final Bpmn bpmn);
+    BPMNDiagram build(final Bpmn bpmn, String label);
 }

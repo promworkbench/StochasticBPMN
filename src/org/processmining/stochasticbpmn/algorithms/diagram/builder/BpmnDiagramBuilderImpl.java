@@ -13,8 +13,8 @@ import java.util.Map;
 
 public class BpmnDiagramBuilderImpl implements BpmnDiagramBuilder {
     @Override
-    public BPMNDiagram build(Bpmn bpmn, BpmnSelectDiagramParameters parameters) {
-        BPMNDiagram newDiagram = new BPMNDiagramImpl("");
+    public BPMNDiagram build(Bpmn bpmn, String label, BpmnSelectDiagramParameters parameters) {
+        BPMNDiagram newDiagram = new BPMNDiagramImpl(label);
         Map<String, BPMNNode> id2node = new HashMap<>();
         Map<String, Swimlane> id2lane = new HashMap<>();
         if (parameters.getDiagram() == BpmnSelectDiagramParameters.NODIAGRAM) {
@@ -28,7 +28,7 @@ public class BpmnDiagramBuilderImpl implements BpmnDiagramBuilder {
     }
 
     @Override
-    public BPMNDiagram build(Bpmn bpmn) {
+    public BPMNDiagram build(Bpmn bpmn, String label) {
         BpmnSelectDiagramParameters parameters = new BpmnSelectDiagramParameters();
         if (!bpmn.getDiagrams().isEmpty()) {
             parameters.setDiagram(bpmn.getDiagrams().iterator().next());
@@ -36,6 +36,6 @@ public class BpmnDiagramBuilderImpl implements BpmnDiagramBuilder {
             parameters.setDiagram(BpmnSelectDiagramParameters.NODIAGRAM);
         }
 
-        return this.build(bpmn, parameters);
+        return this.build(bpmn, label, parameters);
     }
 }

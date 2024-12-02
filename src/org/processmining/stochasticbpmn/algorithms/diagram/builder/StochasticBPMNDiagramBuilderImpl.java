@@ -13,8 +13,8 @@ import java.util.Map;
 
 public class StochasticBPMNDiagramBuilderImpl implements StochasticBPMNDiagramBuilder {
     @Override
-    public StochasticBPMNDiagram build(StochasticBpmn sBpmn, BpmnSelectDiagramParameters parameters) {
-        StochasticBPMNDiagram newDiagram = new StochasticBPMNDiagramImpl("");
+    public StochasticBPMNDiagram build(StochasticBpmn sBpmn, String label, BpmnSelectDiagramParameters parameters) {
+        StochasticBPMNDiagram newDiagram = new StochasticBPMNDiagramImpl(label);
         Map<String, BPMNNode> id2node = new HashMap<>();
         Map<String, Swimlane> id2lane = new HashMap<>();
         if (parameters.getDiagram() == BpmnSelectDiagramParameters.NODIAGRAM) {
@@ -28,7 +28,7 @@ public class StochasticBPMNDiagramBuilderImpl implements StochasticBPMNDiagramBu
     }
 
     @Override
-    public StochasticBPMNDiagram build(StochasticBpmn sBpmn) {
+    public StochasticBPMNDiagram build(StochasticBpmn sBpmn, String label) {
         BpmnSelectDiagramParameters parameters = new BpmnSelectDiagramParameters();
         if (!sBpmn.getDiagrams().isEmpty()) {
             parameters.setDiagram(sBpmn.getDiagrams().iterator().next());
@@ -36,6 +36,6 @@ public class StochasticBPMNDiagramBuilderImpl implements StochasticBPMNDiagramBu
             parameters.setDiagram(BpmnSelectDiagramParameters.NODIAGRAM);
         }
 
-        return this.build(sBpmn, parameters);
+        return this.build(sBpmn, label, parameters);
     }
 }

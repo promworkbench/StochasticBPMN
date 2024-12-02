@@ -17,6 +17,11 @@ public class ObjectFileReader<OUTPUT> implements ObjectReader<File, OUTPUT> {
 
     @Override
     public OUTPUT read(File file) throws Exception {
-        return reader.read(Files.newInputStream(file.toPath()));
+        return read(file, file.getName().split("\\.")[0]);
+    }
+
+    @Override
+    public OUTPUT read(File file, String label) throws Exception {
+        return reader.read(Files.newInputStream(file.toPath()), label);
     }
 }

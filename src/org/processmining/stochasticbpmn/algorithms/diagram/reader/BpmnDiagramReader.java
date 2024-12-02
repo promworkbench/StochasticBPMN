@@ -29,12 +29,17 @@ public class BpmnDiagramReader implements ObjectReader<InputStream, BPMNDiagram>
     }
 
     public static ObjectReader<String, BPMNDiagram> fromFileName() {
-        return new ObjectFilePathReader<>(fromInputStream());
+        return new ObjectFilePathReader<>(fromFile());
     }
 
     @Override
     public BPMNDiagram read(InputStream inputStream) throws Exception {
+        return read(inputStream, "");
+    }
+
+    @Override
+    public BPMNDiagram read(InputStream inputStream, String label) throws Exception {
         Bpmn sbpmn = bpmnReader.read(inputStream);
-        return diagramBuilder.build(sbpmn);
+        return diagramBuilder.build(sbpmn, label);
     }
 }

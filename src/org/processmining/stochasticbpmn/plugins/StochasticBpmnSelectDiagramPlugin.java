@@ -27,7 +27,6 @@ public class StochasticBpmnSelectDiagramPlugin {
     @UITopiaVariant(affiliation = "RWTH Aachen University", author = "Aleksandar Kuzmanoski, Sandhya Velagapudi", email = "aleksandar.kuzmanoski@rwth-aachen.de, sandhya.velagapudi@rwth-aachen.de", pack = "StochasticBPMN", uiLabel = "Stochastic BPMN, select default diagram", uiHelp = "It selects the first encountered diagram in the bpmn xml schema and produces StochasticBPMNDiagram class.")
     @PluginVariant(variantLabel = "Generate Stochastic BPMN Diagram from Stochastic BPMN", requiredParameterLabels = {0}, help = "It selects the first encountered diagram in the bpmn xml schema and produces Stochastic BPMN Diagram class.")
     public StochasticBPMNDiagram selectDefault(PluginContext context, StochasticBpmn sBpmn) {
-        StochasticBPMNDiagram diagram = stochasticBPMNDiagramBuilder.build(sBpmn);
-        return diagram;
+        return stochasticBPMNDiagramBuilder.build(sBpmn, "");
     }
 }

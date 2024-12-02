@@ -22,7 +22,7 @@ public class StochasticBPMNDiagramReader implements ObjectReader<InputStream, St
     }
 
     public static ObjectReader<String, StochasticBPMNDiagram> fromFileName() {
-        return new ObjectFilePathReader<>(fromInputStream());
+        return new ObjectFilePathReader<>(fromFile());
     }
 
     public StochasticBPMNDiagramReader(StochasticBPMNReader sbpmnReader, StochasticBPMNDiagramBuilder diagramBuilder) {
@@ -32,7 +32,12 @@ public class StochasticBPMNDiagramReader implements ObjectReader<InputStream, St
 
     @Override
     public StochasticBPMNDiagram read(InputStream inputStream) throws Exception {
+        return read(inputStream, "");
+    }
+
+    @Override
+    public StochasticBPMNDiagram read(InputStream inputStream, String label) throws Exception {
         StochasticBpmn sbpmn = sbpmnReader.read(inputStream);
-        return diagramBuilder.build(sbpmn);
+        return diagramBuilder.build(sbpmn, label);
     }
 }

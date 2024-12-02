@@ -18,8 +18,6 @@ public interface StochasticBPMNReader extends ObjectReader<InputStream, Stochast
     }
 
     static ObjectReader<String, StochasticBpmn> fromFileName() {
-        return new ObjectFilePathReader<>(fromInputStream());
+        return new ObjectFilePathReader<>(fromFile());
     }
-
-    StochasticBpmn read(final InputStream input) throws Exception;
 }
