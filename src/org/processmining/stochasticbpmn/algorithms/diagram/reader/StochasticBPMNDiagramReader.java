@@ -1,5 +1,6 @@
 package org.processmining.stochasticbpmn.algorithms.diagram.reader;
 
+import org.deckfour.xes.model.XLog;
 import org.processmining.stochasticbpmn.algorithms.diagram.builder.StochasticBPMNDiagramBuilder;
 import org.processmining.stochasticbpmn.algorithms.reader.*;
 import org.processmining.stochasticbpmn.models.bpmn.stochastic.StochasticBpmn;
@@ -38,6 +39,9 @@ public class StochasticBPMNDiagramReader implements ObjectReader<InputStream, St
     @Override
     public StochasticBPMNDiagram read(InputStream inputStream, String label) throws Exception {
         StochasticBpmn sbpmn = sbpmnReader.read(inputStream);
+        if (sbpmn.hasErrors()) {
+            return null;
+        }
         return diagramBuilder.build(sbpmn, label);
     }
 }

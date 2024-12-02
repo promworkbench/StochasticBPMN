@@ -6,6 +6,7 @@ import org.processmining.framework.abstractplugins.AbstractImportPlugin;
 import org.processmining.framework.plugin.PluginContext;
 import org.processmining.framework.plugin.annotations.Plugin;
 import org.processmining.framework.plugin.annotations.PluginLevel;
+import org.processmining.stochasticbpmn.algorithms.diagram.reader.StochasticBPMNDiagramReader;
 import org.processmining.stochasticbpmn.algorithms.reader.StochasticBPMNInputStreamReader;
 import org.processmining.stochasticbpmn.algorithms.reader.StochasticBPMNReader;
 import org.processmining.stochasticbpmn.models.bpmn.stochastic.StochasticBpmn;
@@ -26,11 +27,11 @@ public class StochasticBpmnImportPlugin extends AbstractImportPlugin {
     private final StochasticBPMNReader modelLoader;
 
     public StochasticBpmnImportPlugin() {
-        this.modelLoader = new StochasticBPMNInputStreamReader();
+        this.modelLoader = StochasticBPMNReader.fromInputStream();
     }
 
     public StochasticBpmn importFromStream(PluginContext context, InputStream input, String filename, long fileSizeInBytes) throws Exception {
-        final StochasticBpmn bpmn = modelLoader.read(input);
+        final StochasticBpmn bpmn = modelLoader.read(input, filename);
 
         if (bpmn.hasErrors()) {
             context.getProvidedObjectManager().createProvidedObject("Log of BPMN import", bpmn.getLog(), XLog.class, context);
