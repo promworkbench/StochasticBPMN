@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StochasticGateway extends Gateway {
+
     private final StochasticGatewayWeightedFlow weightedFlow;
 
     public StochasticGateway(AbstractDirectedGraph<BPMNNode, BPMNEdge<? extends BPMNNode, ? extends BPMNNode>> bpmndiagram, String label, GatewayType gatewayType, final StochasticGatewayWeightedFlow weightedFlow) {
@@ -30,6 +31,10 @@ public class StochasticGateway extends Gateway {
     public StochasticGateway(AbstractDirectedGraph<BPMNNode, BPMNEdge<? extends BPMNNode, ? extends BPMNNode>> bpmndiagram, String label, GatewayType gatewayType, SubProcess parentSubProcess, final StochasticGatewayWeightedFlow weightedFlow) {
         super(bpmndiagram, label, gatewayType, parentSubProcess);
         this.weightedFlow = weightedFlow;
+    }
+
+    public StochasticGatewayWeightedFlow getWeightedFlow() {
+        return weightedFlow;
     }
 
     public BigDecimal getWeight(final Collection<BPMNEdge<? extends BPMNNode, ? extends BPMNNode>> outgoingEdges) {

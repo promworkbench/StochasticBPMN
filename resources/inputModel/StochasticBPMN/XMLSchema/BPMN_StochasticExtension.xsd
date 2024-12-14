@@ -1,10 +1,6 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="http://example.com/bpmn/stochastic"
            xmlns="http://example.com/bpmn/stochastic"
-           xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
-           xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
-           xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
-           xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
            elementFormDefault="qualified">
 
     <xs:element name="gatewayWeights">
