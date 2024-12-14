@@ -52,4 +52,10 @@ public class StochasticGatewayWeightedFlow {
     public Probability getFlowProbability(final Collection<String> flows) {
         return this.getFlowProbability(new StochasticGatewayFlowSet(flows));
     }
+
+    public void remove(String... flow) {
+        StochasticGatewayFlowSet flowSet = new StochasticGatewayFlowSet(flow);
+        this.totalWeight = this.totalWeight.subtract(weightedElements.get(flowSet));
+        weightedElements.remove(flowSet);
+    }
 }

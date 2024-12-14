@@ -36,6 +36,8 @@ public class StochasticBPMNUtils {
                         f.getAttributeMap().put("Original id", uuid);
                         xorSplit.getWeightedFlow().assignFlowWeight(xorSplit.getWeight(inEdge), uuid);
                         f.setLabel(f.getLabel());
+                        // remove weighted flow
+                        xorSplit.getWeightedFlow().remove((String) inEdge.getAttributeMap().get("Original id"));
                     } else {
                         addFlow(diagram, source, target);
                     }
