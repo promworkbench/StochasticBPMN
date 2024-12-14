@@ -17,7 +17,7 @@ import java.io.InputStream;
         name = "Import Stochastic BPMN model from extended BPMN 2.0 file",
         level = PluginLevel.NightlyBuild,
         parameterLabels = {"Filename"},
-        returnLabels = {"Stochastic BPMN"},
+        returnLabels = {"Stochastic BPMN Diagram"},
         returnTypes = {StochasticBpmn.class})
 @UIImportPlugin(
         description = "Stochastic BPMN 2.0 files",

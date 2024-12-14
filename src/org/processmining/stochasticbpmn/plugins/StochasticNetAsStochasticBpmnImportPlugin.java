@@ -4,6 +4,7 @@ import org.processmining.contexts.uitopia.annotations.UIImportPlugin;
 import org.processmining.framework.abstractplugins.AbstractImportPlugin;
 import org.processmining.framework.plugin.PluginContext;
 import org.processmining.framework.plugin.annotations.Plugin;
+import org.processmining.framework.plugin.annotations.PluginLevel;
 import org.processmining.models.graphbased.directed.petrinet.StochasticNet;
 import org.processmining.models.semantics.petrinet.Marking;
 import org.processmining.stochasticbpmn.Main;
@@ -17,12 +18,14 @@ import java.io.InputStream;
 
 @Plugin(
         name = "Import Stochastic net as a Stochastic BPMN diagram",
+        level = PluginLevel.NightlyBuild,
         parameterLabels = {"Filename"},
         returnLabels = {"Stochastic BPMN Diagram"},
         returnTypes = {StochasticBPMNDiagram.class})
 @UIImportPlugin(
         description = "Stochastic net files",
-        extensions = {"pnml"})
+        extensions = {"pnml"},
+        pack = "StochasticBPMN")
 public class StochasticNetAsStochasticBpmnImportPlugin extends AbstractImportPlugin {
 
     protected StochasticBPMNDiagram importFromStream(PluginContext context, InputStream input, String filename,
