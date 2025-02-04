@@ -19,16 +19,16 @@ According to the BPMN specification, each file might contain one or more diagram
 ```java
 StochasticBPMNDiagram sbpmnDiagram = StochasticBPMNDiagramReader.fromFile().read(file);
 ```
-Additionally, there are convinience methods that can help you read from `InputStream` and from `FileName`, see [StochasticBPMNDiagramReader](https://github.com/promworkbench/StochasticBPMN/blob/main/src/org/processmining/stochasticbpmn/algorithms/reader/StochasticBPMNReader.java) definition for more details.
+Additionally, there are convinience methods that can help you read from `InputStream` and from `FileName`, see [StochasticBPMNDiagramReader](src/org/processmining/stochasticbpmn/algorithms/reader/StochasticBPMNReader.java) definition for more details.
 
 If you want to select a specific diagram then you have to use the intermidiate representation `StochasticBpmn` which is exact replica of the file structure in java classes (not a diagram). Then, you can specify which diagram you want to be extracted.
 ```java
     StochasticBpmn sbpm = StochasticBPMNReader.fromFile().read(file);
     StochasticBPMNDiagram diagram = StochasticBPMNDiagramBuilder.getInstance().build(sbpmn, label, selectDiagramParameters);
 ```
-For more details see [StochasticBPMNReader](https://github.com/promworkbench/StochasticBPMN/blob/main/src/org/processmining/stochasticbpmn/algorithms/reader/StochasticBPMNReader.java) and [StochasticBPMNDiagramBuilder](https://github.com/promworkbench/StochasticBPMN/blob/main/src/org/processmining/stochasticbpmn/algorithms/diagram/builder/StochasticBPMNDiagramBuilderImpl.java).
+For more details see [StochasticBPMNReader](src/org/processmining/stochasticbpmn/algorithms/reader/StochasticBPMNReader.java) and [StochasticBPMNDiagramBuilder](src/org/processmining/stochasticbpmn/algorithms/diagram/builder/StochasticBPMNDiagramBuilderImpl.java).
 
-We also provide similar convenience reading classes for normal BPMN models (see [BPMNDiagramReader](https://github.com/promworkbench/StochasticBPMN/blob/main/src/org/processmining/stochasticbpmn/algorithms/diagram/reader/BpmnDiagramReader.java))
+We also provide similar convenience reading classes for normal BPMN models (see [BPMNDiagramReader](src/org/processmining/stochasticbpmn/algorithms/diagram/reader/BpmnDiagramReader.java))
 
 ###### Reading SBPMN directly from SPN
 To read Stochastic Petri Net (SPN) directly from a `.pnml` file.
@@ -45,5 +45,5 @@ Our schema allows for assigning weight to any subset of outgoing sequence flows 
 
 ![sbpmn_xml_schema_class_diagram.png](resources/inputModel/StochasticBPMN/XMLSchema/sbpmn_xml_schema_class_diagram.png)
 ### Examples
-- [Handling of Compensation Requests](https://github.com/promworkbench/StochasticBPMN/blob/main/resources/inputModel/StochasticBPMN/example/Instance%20-%20BPMN%20-%20Handling%20of%20Compensation%20Requests%20Simplified.bpmn) depicted on the first figure avobe.
-- [rtfm_IMf02_ABE](https://github.com/promworkbench/StochasticBPMN/blob/main/resources/inputModel/StochasticBPMN/example/Instance%20-%20Stochastic%20BPMN%20-%20rtfm_IMf02_ABE.bpmn) discovered model from the [Road Traffic Fine Management Event Log](https://data.4tu.nl/articles/dataset/Road_Traffic_Fine_Management_Process/12683249), using [Inductive Miner (IMf02)](https://github.com/promworkbench/InductiveMiner) with threshold of 0.2, in combination with [Alignment-Based Estimator (ABE)](https://github.com/promworkbench/StochasticWeightEstimation), finally converted from SPN into SBPMN.
+- [Handling of Compensation Requests](resources/inputModel/StochasticBPMN/example/Instance%20-%20BPMN%20-%20Handling%20of%20Compensation%20Requests%20Simplified.bpmn) depicted on the first figure avobe.
+- [rtfm_IMf02_ABE](resources/inputModel/StochasticBPMN/example/Instance%20-%20Stochastic%20BPMN%20-%20rtfm_IMf02_ABE.bpmn) discovered model from the [Road Traffic Fine Management Event Log](https://data.4tu.nl/articles/dataset/Road_Traffic_Fine_Management_Process/12683249), using [Inductive Miner (IMf02)](https://github.com/promworkbench/InductiveMiner) with threshold of 0.2, in combination with [Alignment-Based Estimator (ABE)](https://github.com/promworkbench/StochasticWeightEstimation), finally converted from SPN into SBPMN.
