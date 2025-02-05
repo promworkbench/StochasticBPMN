@@ -5,7 +5,9 @@ name: Java CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - "main"
+      - "export-plugin"
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:

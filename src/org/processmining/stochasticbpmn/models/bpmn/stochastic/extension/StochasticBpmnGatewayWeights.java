@@ -28,6 +28,16 @@ public class StochasticBpmnGatewayWeights extends BpmnExtensionElement {
         return false;
     }
 
+    public String exportElements() {
+        StringBuilder s = new StringBuilder(super.exportElements());
+        if(!this.weightedElements.isEmpty()) {
+            for(StochasticBpmnGatewayWeightedElement element : weightedElements) {
+                s.append(element.exportElements());
+            }
+        }
+        return s.toString();
+    }
+
     public Collection<StochasticBpmnGatewayWeightedElement> getWeightedElements() {
         return weightedElements;
     }

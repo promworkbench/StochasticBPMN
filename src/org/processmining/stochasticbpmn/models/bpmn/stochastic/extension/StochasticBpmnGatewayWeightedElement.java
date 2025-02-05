@@ -33,12 +33,30 @@ public class StochasticBpmnGatewayWeightedElement extends BpmnElement {
         return false;
     }
 
+    public String exportElements() {
+        StringBuilder s = new StringBuilder(super.exportElements());
+        if(!outgoingFlow.isEmpty()) {
+            for(StochasticBpmnGatewayOutgoing outgoing : outgoingFlow) {
+                s.append(outgoing.exportElement());
+            }
+        }
+        return s.toString();
+    }
+
     protected void importAttributes(XmlPullParser xpp, Bpmn bpmn) {
         super.importAttributes(xpp, bpmn);
         String value = xpp.getAttributeValue(null, "weight");
         if (value != null) {
             this.weight = new BigDecimal(value);
         }
+    }
+
+    protected String exportAttributes() {
+        StringBuilder s = new StringBuilder(super.exportAttributes());
+        if (this.weight != null) {
+            s.append(this.exportAttribute("weight", this.weight.toString()));
+        }
+        return s.toString();
     }
 
     public BigDecimal getWeight() {

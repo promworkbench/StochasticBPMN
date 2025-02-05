@@ -1,6 +1,8 @@
 package org.processmining.stochasticbpmn.models.bpmn.extensions;
 
 
+import org.processmining.models.graphbased.directed.bpmn.BPMNDiagram;
+import org.processmining.models.graphbased.directed.bpmn.elements.Gateway;
 import org.processmining.plugins.bpmn.Bpmn;
 import org.processmining.plugins.bpmn.BpmnElement;
 import org.xmlpull.v1.XmlPullParser;
@@ -40,6 +42,27 @@ public class BpmnExtensionElements extends BpmnElement {
                 }
             }
             return false;
+        }
+    }
+
+    public String exportElements() {
+        StringBuilder s = new StringBuilder();
+        if (!extensionElements.isEmpty()) {
+            for (BpmnExtensionElement element : extensionElements) {
+                s.append(element.exportElement());
+            }
+        }
+        return s.toString();
+    }
+
+    public void marshall() {
+        for (Map.Entry<String, Class<? extends BpmnExtensionElement>> supportedElement : this.supportedExtensionElements.entrySet()) {
+            try {
+                BpmnExtensionElement extensionElement = supportedElement.getValue().getConstructor().newInstance();
+                this.extensionElements.add(extensionElement);
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

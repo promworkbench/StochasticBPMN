@@ -1,10 +1,12 @@
 package org.processmining.stochasticbpmn.models.bpmn.stochastic;
 
 import org.processmining.models.graphbased.directed.bpmn.BPMNDiagram;
+import org.processmining.models.graphbased.directed.bpmn.BPMNEdge;
 import org.processmining.models.graphbased.directed.bpmn.BPMNNode;
 import org.processmining.models.graphbased.directed.bpmn.elements.Gateway;
 import org.processmining.models.graphbased.directed.bpmn.elements.SubProcess;
 import org.processmining.models.graphbased.directed.bpmn.elements.Swimlane;
+import org.processmining.plugins.bpmn.*;
 import org.processmining.stochasticbpmn.models.bpmn.extensions.BpmnExtensionElement;
 import org.processmining.stochasticbpmn.models.bpmn.extensions.BpmnExtensionElements;
 import org.processmining.stochasticbpmn.models.bpmn.stochastic.extension.StochasticBpmnGatewayOutgoing;
@@ -13,11 +15,9 @@ import org.processmining.stochasticbpmn.models.bpmn.stochastic.extension.Stochas
 import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
 import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGateway;
 import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGatewayWeightedFlow;
-import org.processmining.plugins.bpmn.Bpmn;
-import org.processmining.plugins.bpmn.BpmnExclusiveGateway;
-import org.processmining.plugins.bpmn.BpmnOutgoing;
 import org.xmlpull.v1.XmlPullParser;
 
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -40,7 +40,17 @@ public class StochasticBpmnExclusiveGateway extends BpmnExclusiveGateway {
             return true;
         }
         return false;
+    }
 
+    protected String exportElements() {
+        StringBuilder s = new StringBuilder();
+        if(!this.extensionElements.getExtensionElements().isEmpty()) {
+            s.append(this.extensionElements.exportElements());
+        }
+        for (BpmnIncoming incoming : incomings) {
+            s.append(incoming.exportElement());
+        }
+        return s.toString();
     }
 
     @Override
@@ -108,6 +118,48 @@ public class StochasticBpmnExclusiveGateway extends BpmnExclusiveGateway {
         }
     }
 
+    public void marshall(BPMNDiagram diagram, Gateway gateway){
+        super.marshall(gateway);
+        int incoming = 0;
+        int outgoing = 0;
+
+        for(BPMNEdge<? extends BPMNNode, ? extends BPMNNode> e: diagram.getEdges()) {
+            if(e.getTarget().equals(gateway)) {
+                BpmnIncoming in = new BpmnIncoming("incoming");
+                in.setText(e.getEdgeID().toString().replace(" ", "_"));
+                incomings.add(in);
+                incoming++;
+            }
+            if (e.getSource().equals(gateway)) {
+                BpmnOutgoing out = new BpmnOutgoing("outgoing");
+                out.setText(e.getEdgeID().toString().replace(" ", "_"));
+                outgoings.add(out);
+                outgoing++;
+            }
+        }
+        String direction;
+        if (incoming > 1 && outgoing > 1) {
+            direction = "Mixed";
+        } else if (incoming == 1 && outgoing > 1) {
+            direction = "Diverging";
+        } else if (incoming > 1 && outgoing == 1) {
+            direction = "Converging";
+        } else {
+            direction = "Unspecified";
+        }
+        setPrivateField("gatewayDirection", direction, BpmnAbstractGateway.class);
+        if (gateway.getDefaultFlow() != null) {
+            String defaultFlowValue = gateway.getDefaultFlow().getEdgeID().toString().replace(" ", "_");
+            setPrivateField("defaultFlow", defaultFlowValue, BpmnAbstractGateway.class);
+        }
+
+        Map<String, Class<? extends BpmnExtensionElement>> supportedExtensionElements = new HashMap<>();
+        supportedExtensionElements.put("StochasticBpmnGatewayWeights", StochasticBpmnGatewayWeights.class);
+        BpmnExtensionElements extensionElements = new BpmnExtensionElements(Collections.singletonMap("sbpmn:gatewayWeights", StochasticBpmnGatewayWeights.class));
+        extensionElements.marshall();
+        this.extensionElements = extensionElements;
+    }
+
     private Optional<StochasticBpmnGatewayWeights> getWeights() {
         if (extensionElements == null) {
             return Optional.empty();
@@ -127,5 +179,16 @@ public class StochasticBpmnExclusiveGateway extends BpmnExclusiveGateway {
             weightedFlow.assignFlowWeight(wElement.getWeight(), outgoingEdges);
         }
         return weightedFlow;
+    }
+
+    // Utility method to set private fields via reflection
+    private void setPrivateField(String fieldName, Object value, Class<?> targetClass) {
+        try {
+            Field field = targetClass.getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(this, value);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 }
