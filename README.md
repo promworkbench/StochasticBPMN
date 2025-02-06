@@ -3,6 +3,7 @@ A Stochastic BPMN package for the [ProM-Framework](https://github.com/promworkbe
 ![Instance - SBPMN - Handling of Compensation Requests.svg](resources/inputModel/StochasticBPMN/example/Instance%20-%20SBPMN%20-%20Handling%20of%20Compensation%20Requests.svg)
 
 ## Usage 
+In this section we talk about, import, export, conversion, etc. We also talk about different ways on how the functionality of this package can be accessed. Currently, in ProM and Java, terminal access is pending.
 ### In ProM
 #### Import
 Just drag-n-drop the .bpmn file (extended with stochastic data) in ProM and select the `Stochastic BPMN 2.0 files (Diagram)` plugin for import. This will select the first diagram listed in the BPMN file.
@@ -45,5 +46,5 @@ Our schema allows for assigning weight to any subset of outgoing sequence flows 
 
 ![sbpmn_xml_schema_class_diagram.png](resources/inputModel/StochasticBPMN/XMLSchema/sbpmn_xml_schema_class_diagram.png)
 ### Examples
-- [Handling of Compensation Requests](resources/inputModel/StochasticBPMN/example/Instance%20-%20BPMN%20-%20Handling%20of%20Compensation%20Requests%20Simplified.bpmn) depicted on the first figure avobe.
-- [rtfm_IMf02_ABE](resources/inputModel/StochasticBPMN/example/Instance%20-%20Stochastic%20BPMN%20-%20rtfm_IMf02_ABE.bpmn) discovered model from the [Road Traffic Fine Management Event Log](https://data.4tu.nl/articles/dataset/Road_Traffic_Fine_Management_Process/12683249), using [Inductive Miner (IMf02)](https://github.com/promworkbench/InductiveMiner) with threshold of 0.2, in combination with [Alignment-Based Estimator (ABE)](https://github.com/promworkbench/StochasticWeightEstimation), finally converted from SPN into SBPMN.
+- [Handling of Compensation Requests](resources/inputModel/StochasticBPMN/example/Instance%20-%20BPMN%20-%20Handling%20of%20Compensation%20Requests%20Simplified.bpmn) depicted on the first figure above.
+- [rtfm_IMf02_ABE](resources/inputModel/StochasticBPMN/example/Instance%20-%20Stochastic%20BPMN%20-%20rtfm_IMf02_ABE.bpmn) discovered model from the [Road Traffic Fine Management Event Log (rtfm)](https://data.4tu.nl/articles/dataset/Road_Traffic_Fine_Management_Process/12683249), using [Inductive Miner (IMf02)](https://github.com/promworkbench/InductiveMiner) with threshold of 0.2, in combination with [Alignment-Based Estimator (ABE)](https://github.com/promworkbench/StochasticWeightEstimation), finally converted from SPN into SBPMN.
