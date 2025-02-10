@@ -7,12 +7,18 @@ import org.processmining.models.graphbased.directed.bpmn.elements.Gateway;
 import org.processmining.models.graphbased.directed.bpmn.elements.SubProcess;
 import org.processmining.models.graphbased.directed.bpmn.elements.Swimlane;
 import org.processmining.plugins.bpmn.*;
+import org.processmining.stochasticbpmn.models.bpmn.stochastic.extension.StochasticBpmnGatewayWeightedElement;
+import org.processmining.stochasticbpmn.models.bpmn.stochastic.extension.StochasticBpmnGatewayWeights;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGateway;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGatewayWeightedFlow;
 import org.xmlpull.v1.XmlPullParser;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
+import java.util.Optional;
 
 public class StochasticBpmnProcess extends BpmnProcess {
     public StochasticBpmnProcess() {
@@ -114,6 +120,8 @@ public class StochasticBpmnProcess extends BpmnProcess {
 
     public boolean marshall(BPMNDiagram diagram, Swimlane pool) {
         this.callPrivateMethod("clearAll");
+
+//        BPMNDiagram diagram = (BPMNDiagram)sDiagram;
 
         this.callPrivateMethod("marshallEvents", diagram, pool);
         this.callPrivateMethod("marshallActivities", diagram, pool);

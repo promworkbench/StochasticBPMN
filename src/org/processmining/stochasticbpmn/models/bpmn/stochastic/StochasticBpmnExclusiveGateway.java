@@ -45,7 +45,7 @@ public class StochasticBpmnExclusiveGateway extends BpmnExclusiveGateway {
     protected String exportElements() {
         StringBuilder s = new StringBuilder();
         if(!this.extensionElements.getExtensionElements().isEmpty()) {
-            s.append(this.extensionElements.exportElements());
+            s.append(this.extensionElements.exportElement());
         }
         for (BpmnIncoming incoming : incomings) {
             s.append(incoming.exportElement());
@@ -153,10 +153,8 @@ public class StochasticBpmnExclusiveGateway extends BpmnExclusiveGateway {
             setPrivateField("defaultFlow", defaultFlowValue, BpmnAbstractGateway.class);
         }
 
-        Map<String, Class<? extends BpmnExtensionElement>> supportedExtensionElements = new HashMap<>();
-        supportedExtensionElements.put("StochasticBpmnGatewayWeights", StochasticBpmnGatewayWeights.class);
-        BpmnExtensionElements extensionElements = new BpmnExtensionElements(Collections.singletonMap("sbpmn:gatewayWeights", StochasticBpmnGatewayWeights.class));
-        extensionElements.marshall();
+        BpmnExtensionElements extensionElements = new BpmnExtensionElements(Collections.singletonMap("gatewayWeights", StochasticBpmnGatewayWeights.class));
+        extensionElements.marshall(diagram, gateway);
         this.extensionElements = extensionElements;
     }
 

@@ -1,7 +1,16 @@
 package org.processmining.stochasticbpmn.models.bpmn.stochastic.extension;
 
+import org.processmining.models.graphbased.directed.bpmn.BPMNDiagram;
+import org.processmining.models.graphbased.directed.bpmn.BPMNEdge;
+import org.processmining.models.graphbased.directed.bpmn.BPMNNode;
+import org.processmining.models.graphbased.directed.bpmn.elements.Gateway;
 import org.processmining.plugins.bpmn.Bpmn;
 import org.processmining.plugins.bpmn.BpmnElement;
+import org.processmining.plugins.bpmn.BpmnIncoming;
+import org.processmining.plugins.bpmn.BpmnOutgoing;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGateway;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGatewayWeightedFlow;
 import org.xmlpull.v1.XmlPullParser;
 
 import java.math.BigDecimal;
@@ -34,7 +43,7 @@ public class StochasticBpmnGatewayWeightedElement extends BpmnElement {
     }
 
     public String exportElements() {
-        StringBuilder s = new StringBuilder(super.exportElements());
+        StringBuilder s = new StringBuilder();
         if(!outgoingFlow.isEmpty()) {
             for(StochasticBpmnGatewayOutgoing outgoing : outgoingFlow) {
                 s.append(outgoing.exportElement());
@@ -52,7 +61,7 @@ public class StochasticBpmnGatewayWeightedElement extends BpmnElement {
     }
 
     protected String exportAttributes() {
-        StringBuilder s = new StringBuilder(super.exportAttributes());
+        StringBuilder s = new StringBuilder();
         if (this.weight != null) {
             s.append(this.exportAttribute("weight", this.weight.toString()));
         }
@@ -63,8 +72,24 @@ public class StochasticBpmnGatewayWeightedElement extends BpmnElement {
         return weight;
     }
 
+    public void marshall(BPMNDiagram diagram, Gateway gateway) {
+        for(BPMNEdge<? extends BPMNNode, ? extends BPMNNode> e: diagram.getEdges()) {
+            if (e.getSource().equals(gateway)) {
+//                StochasticGatewayWeightedFlow weightedFlow = gateway.getWeightedFlow();
+                StochasticBpmnGatewayOutgoing out = new StochasticBpmnGatewayOutgoing();
+                out.setText(e.getEdgeID().toString().replace(" ", "_"));
+                outgoingFlow.add(out);
+//                weight = weightedFlow.getFlowWeight(getEdgeId(e));
+            }
+        }
+    }
+
     public Collection<StochasticBpmnGatewayOutgoing> getOutgoing() {
         return outgoingFlow;
+    }
+
+    private String getEdgeId(BPMNEdge<? extends BPMNNode, ? extends BPMNNode> edge) {
+        return edge.getAttributeMap().get("Original id").toString();
     }
 
     @Override

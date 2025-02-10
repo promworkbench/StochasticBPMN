@@ -122,6 +122,6 @@ public class StochasticBPMNExportPlugin {
         StochasticBpmnDefinitionsBuilder definitionsBuilder = new StochasticBpmnDefinitionsBuilder(context, diagram);
         StochasticBpmnDefinitions definitions = new StochasticBpmnDefinitions("definitions", definitionsBuilder);
 //        System.out.println(definitions.getClass().getName());
-        return definitions.exportElements();
+        return definitions.exportElement();
     }
 }

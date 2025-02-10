@@ -22,6 +22,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class StochasticBpmnDefinitions extends BpmnDefinitions {
 
@@ -33,6 +34,7 @@ public class StochasticBpmnDefinitions extends BpmnDefinitions {
         messages = new HashSet();
         diagrams = builder.diagrams;
     }
+
 
     public static class StochasticBpmnDefinitionsBuilder {
         protected Collection<BpmnResource> resources;
