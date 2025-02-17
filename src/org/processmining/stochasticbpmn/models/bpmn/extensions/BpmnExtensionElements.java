@@ -1,12 +1,17 @@
 package org.processmining.stochasticbpmn.models.bpmn.extensions;
 
 
+import org.apache.batik.extension.ExtensionElement;
 import org.processmining.models.graphbased.directed.bpmn.BPMNDiagram;
+import org.processmining.models.graphbased.directed.bpmn.elements.Flow;
 import org.processmining.models.graphbased.directed.bpmn.elements.Gateway;
 import org.processmining.plugins.bpmn.Bpmn;
 import org.processmining.plugins.bpmn.BpmnElement;
+import org.processmining.stochasticbpmn.models.bpmn.stochastic.extension.StochasticBpmnGatewayWeights;
 import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticFlow;
 import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGateway;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGatewayWeightedFlow;
 import org.xmlpull.v1.XmlPullParser;
 
 import java.lang.reflect.InvocationTargetException;
@@ -47,6 +52,10 @@ public class BpmnExtensionElements extends BpmnElement {
         }
     }
 
+    public void addExtensionElement(BpmnExtensionElement extensionElement) {
+        this.extensionElements.add(extensionElement);
+    }
+
     public String exportElements() {
         StringBuilder s = new StringBuilder();
         if (!extensionElements.isEmpty()) {
@@ -57,17 +66,6 @@ public class BpmnExtensionElements extends BpmnElement {
         return s.toString();
     }
 
-    public void marshall(BPMNDiagram diagram, Gateway gateway) {
-        for (Map.Entry<String, Class<? extends BpmnExtensionElement>> supportedElement : this.supportedExtensionElements.entrySet()) {
-            try {
-                BpmnExtensionElement extensionElement = supportedElement.getValue().getConstructor().newInstance();
-                extensionElement.marshall(diagram, gateway);
-                this.extensionElements.add(extensionElement);
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
 
     public List<BpmnExtensionElement> getExtensionElements() {
         return extensionElements;

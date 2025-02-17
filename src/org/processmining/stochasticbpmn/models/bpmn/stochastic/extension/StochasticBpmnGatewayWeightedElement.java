@@ -3,14 +3,13 @@ package org.processmining.stochasticbpmn.models.bpmn.stochastic.extension;
 import org.processmining.models.graphbased.directed.bpmn.BPMNDiagram;
 import org.processmining.models.graphbased.directed.bpmn.BPMNEdge;
 import org.processmining.models.graphbased.directed.bpmn.BPMNNode;
+import org.processmining.models.graphbased.directed.bpmn.elements.Flow;
 import org.processmining.models.graphbased.directed.bpmn.elements.Gateway;
 import org.processmining.plugins.bpmn.Bpmn;
 import org.processmining.plugins.bpmn.BpmnElement;
 import org.processmining.plugins.bpmn.BpmnIncoming;
 import org.processmining.plugins.bpmn.BpmnOutgoing;
-import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
-import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGateway;
-import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGatewayWeightedFlow;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.*;
 import org.xmlpull.v1.XmlPullParser;
 
 import java.math.BigDecimal;
@@ -72,16 +71,15 @@ public class StochasticBpmnGatewayWeightedElement extends BpmnElement {
         return weight;
     }
 
-    public void marshall(BPMNDiagram diagram, Gateway gateway) {
-        for(BPMNEdge<? extends BPMNNode, ? extends BPMNNode> e: diagram.getEdges()) {
-            if (e.getSource().equals(gateway)) {
-//                StochasticGatewayWeightedFlow weightedFlow = gateway.getWeightedFlow();
-                StochasticBpmnGatewayOutgoing out = new StochasticBpmnGatewayOutgoing();
-                out.setText(e.getEdgeID().toString().replace(" ", "_"));
+    public void marshall(BPMNDiagram diagram, StochasticGatewayFlowSet flowSet, BigDecimal weight) {
+        StochasticBpmnGatewayOutgoing out = new StochasticBpmnGatewayOutgoing();
+        for (Flow flow : diagram.getFlows()) {
+            if (flowSet.contains(flow.getAttributeMap().get("Original id").toString())) {
+                out.setText(flow.getEdgeID().toString().replace(" ", "_"));
                 outgoingFlow.add(out);
-//                weight = weightedFlow.getFlowWeight(getEdgeId(e));
             }
         }
+        this.weight = weight;
     }
 
     public Collection<StochasticBpmnGatewayOutgoing> getOutgoing() {

@@ -36,12 +36,16 @@ public class StochasticBPMNExportPlugin {
     private static final String XSI_PREFIX = "xsi";
     private static final String XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance";
 
+    private static final String SBPMN_PREFIX = "sbpmn";
+    private static final String SBPMN_NAMESPACE = "http://example.com/bpmn/stochastic";
+
+
     private static final String TARGET_NAMESPACE = "http://www.omg.org/bpmn20";
     private static final String EXPORTER = "ProM. http://www.promtools.org/prom6";
     private static final String EXPORTER_VERSION = "6.3";
 
 
-    private static final String SCHEMA_LOCATION = "http://example.com/bpmn/stochastic";
+    private static final String SCHEMA_LOCATION = "http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd";
     /**
      * Plugin for StochasticBPMN XML 2.0 export from StochasticBPMN diagram
      *
@@ -104,6 +108,9 @@ public class StochasticBPMNExportPlugin {
 
         writer.setPrefix(XSI_PREFIX, XSI_NAMESPACE);
         writer.writeNamespace(XSI_PREFIX, XSI_NAMESPACE);
+
+        writer.setPrefix(SBPMN_PREFIX, SBPMN_NAMESPACE);
+        writer.writeNamespace(SBPMN_PREFIX, SBPMN_NAMESPACE);
 
         writer.writeAttribute("targetNamespace", TARGET_NAMESPACE);
         writer.writeAttribute("exporter", EXPORTER);

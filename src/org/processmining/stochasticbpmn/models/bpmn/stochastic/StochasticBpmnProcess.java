@@ -7,18 +7,14 @@ import org.processmining.models.graphbased.directed.bpmn.elements.Gateway;
 import org.processmining.models.graphbased.directed.bpmn.elements.SubProcess;
 import org.processmining.models.graphbased.directed.bpmn.elements.Swimlane;
 import org.processmining.plugins.bpmn.*;
-import org.processmining.stochasticbpmn.models.bpmn.stochastic.extension.StochasticBpmnGatewayWeightedElement;
-import org.processmining.stochasticbpmn.models.bpmn.stochastic.extension.StochasticBpmnGatewayWeights;
 import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
 import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGateway;
-import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGatewayWeightedFlow;
 import org.xmlpull.v1.XmlPullParser;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.Optional;
 
 public class StochasticBpmnProcess extends BpmnProcess {
     public StochasticBpmnProcess() {
@@ -82,7 +78,7 @@ public class StochasticBpmnProcess extends BpmnProcess {
         for (BpmnTask task : getTasks()) {
             s.append(task.exportElement());
         }
-        for (StochasticBpmnExclusiveGateway exclusiveGateway : getStochasticExclusiveGateways()) {
+        for (BpmnExclusiveGateway exclusiveGateway : getExclusiveGateways()) {
             s.append(exclusiveGateway.exportElement());
         }
         for (BpmnParallelGateway parallelGateway : getParallelGateways()) {
@@ -91,10 +87,10 @@ public class StochasticBpmnProcess extends BpmnProcess {
         for (BpmnInclusiveGateway inclusiveGateway : getInclusiveGateways()) {
             s.append(inclusiveGateway.exportElement());
         }
-        for (StochasticBpmnSubProcess subPro : getStochasticSubProcesses()) {
+        for (BpmnSubProcess subPro : getSubProcesses()) {
             s.append(subPro.exportElement());
         }
-        for (StochasticBpmnSequenceFlow sequenceFlow : getStochasticSequenceFlows()) {
+        for (BpmnSequenceFlow sequenceFlow : getSequenceFlows()) {
             s.append(sequenceFlow.exportElement());
         }
         for (BpmnDataObject dataObject : getDataObjects()) {
@@ -118,34 +114,41 @@ public class StochasticBpmnProcess extends BpmnProcess {
         return s.toString();
     }
 
-    public boolean marshall(BPMNDiagram diagram, Swimlane pool) {
+    public boolean marshall(StochasticBPMNDiagram diagram, Swimlane pool) {
         this.callPrivateMethod("clearAll");
-
-//        BPMNDiagram diagram = (BPMNDiagram)sDiagram;
 
         this.callPrivateMethod("marshallEvents", diagram, pool);
         this.callPrivateMethod("marshallActivities", diagram, pool);
         this.callPrivateMethod("marshallCallActivities", diagram, pool);
         this.marshallStochasticGateways(diagram, pool);
         this.callPrivateMethod("marshallDataObjects", diagram, pool);
-        this.marshallStochasticSubProcesses(diagram, pool);
-        this.marshallStochasticControlFlows(diagram, pool);
+        this.callPrivateMethod("marshallSubProcesses", diagram, pool);
+        this.callPrivateMethod("marshallControlFlows", diagram, pool);
         this.callPrivateMethod_LaneSet("marshallLaneSet", diagram, pool);
         this.callPrivateMethod("marshallArtifacts", diagram, pool);
         this.callPrivateMethod("marshallAssociations", diagram, pool);
 
         return !(getStartEvents().isEmpty() && getEndEvents().isEmpty() && getTasks().isEmpty()
-                && getStochasticExclusiveGateways().isEmpty() && getParallelGateways().isEmpty()
+                && getExclusiveGateways().isEmpty() && getParallelGateways().isEmpty()
                 && getTextAnnotations().isEmpty() && getAssociations().isEmpty() && (getLaneSet() == null));
     }
 
-    private void marshallStochasticGateways(BPMNDiagram diagram, Swimlane pool) {
+    private void marshallStochasticGateways(StochasticBPMNDiagram diagram, Swimlane pool) {
         for (Gateway gateway : diagram.getGateways(pool)) {
             if (gateway.getAncestorSubProcess() == null) {
                 if (gateway.getGatewayType() == Gateway.GatewayType.DATABASED) {
-                    StochasticBpmnExclusiveGateway exclusiveGateway = new StochasticBpmnExclusiveGateway();
-                    exclusiveGateway.marshall(diagram, gateway);
-                    this.getStochasticExclusiveGateways().add(exclusiveGateway);
+                    if (diagram.getOutEdges(gateway).size() == 1) {
+                        BpmnExclusiveGateway exclusiveGateway = new BpmnExclusiveGateway("exclusiveGateway");
+                        exclusiveGateway.marshall(diagram, gateway);
+                        this.getExclusiveGateways().add(exclusiveGateway);
+                    } else {
+                        StochasticBpmnExclusiveGateway exclusiveGateway = new StochasticBpmnExclusiveGateway();
+                        if(!(gateway instanceof StochasticGateway)){
+                            throw new RuntimeException("Required: Stochastic Gateway. Got Gateway " + gateway.getId());
+                        }
+                        exclusiveGateway.marshall(diagram, (StochasticGateway) gateway);
+                        this.getExclusiveGateways().add(exclusiveGateway);
+                    }
                 } else if (gateway.getGatewayType() == Gateway.GatewayType.PARALLEL) {
                     BpmnParallelGateway parallelGateway = new BpmnParallelGateway("parallelGateway");
                     parallelGateway.marshall(diagram, gateway);
@@ -164,26 +167,6 @@ public class StochasticBpmnProcess extends BpmnProcess {
 
     }
 
-    private void marshallStochasticSubProcesses(BPMNDiagram diagram, Swimlane pool) {
-        for (SubProcess sub : diagram.getSubProcesses(pool)) {
-            if (sub.getAncestorSubProcess() == null) {
-                StochasticBpmnSubProcess subProcess = new StochasticBpmnSubProcess();
-                subProcess.marshall(sub, diagram);
-                getStochasticSubProcesses().add(subProcess);
-            }
-        }
-    }
-
-    private void marshallStochasticControlFlows(BPMNDiagram diagram, Swimlane pool) {
-        for (Flow flow : diagram.getFlows(pool)) {
-            if (flow.getAncestorSubProcess() == null) {
-                StochasticBpmnSequenceFlow sequenceFlow = new StochasticBpmnSequenceFlow();
-                sequenceFlow.marshall(flow);
-                getStochasticSequenceFlows().add(sequenceFlow);
-            }
-        }
-    }
-
     private Object getPrivateField(String fieldName) {
         try {
             Field field = BpmnProcess.class.getDeclaredField(fieldName);
@@ -199,7 +182,7 @@ public class StochasticBpmnProcess extends BpmnProcess {
             Class<BpmnProcess> superClass = BpmnProcess.class;
             Method method = superClass.getDeclaredMethod(methodName, BPMNDiagram.class, Swimlane.class);
             method.setAccessible(true);
-            method.invoke(this, diagram, pool);  // 'this' refers to the current instance of SubClass
+            method.invoke(this, diagram, pool);
 
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
@@ -241,13 +224,13 @@ public class StochasticBpmnProcess extends BpmnProcess {
     }
 
     @SuppressWarnings("unchecked")
-    private Collection<StochasticBpmnSubProcess> getStochasticSubProcesses() {
-        return (Collection<StochasticBpmnSubProcess>) getPrivateField("subprocess");
+    private Collection<BpmnSubProcess> getSubProcesses() {
+        return (Collection<BpmnSubProcess>) getPrivateField("subprocess");
     }
 
     @SuppressWarnings("unchecked")
-    private Collection<StochasticBpmnExclusiveGateway> getStochasticExclusiveGateways() {
-        return (Collection<StochasticBpmnExclusiveGateway>) getPrivateField("exclusiveGateways");
+    private Collection<BpmnExclusiveGateway> getExclusiveGateways() {
+        return (Collection<BpmnExclusiveGateway>) getPrivateField("exclusiveGateways");
     }
 
     @SuppressWarnings("unchecked")
@@ -271,8 +254,8 @@ public class StochasticBpmnProcess extends BpmnProcess {
     }
 
     @SuppressWarnings("unchecked")
-    private Collection<StochasticBpmnSequenceFlow> getStochasticSequenceFlows() {
-        return (Collection<StochasticBpmnSequenceFlow>) getPrivateField("sequenceFlows");
+    private Collection<BpmnSequenceFlow> getSequenceFlows() {
+        return (Collection<BpmnSequenceFlow>) getPrivateField("sequenceFlows");
     }
 
     @SuppressWarnings("unchecked")

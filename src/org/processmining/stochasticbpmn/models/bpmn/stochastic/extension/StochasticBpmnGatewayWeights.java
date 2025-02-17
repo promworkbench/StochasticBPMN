@@ -1,11 +1,11 @@
 package org.processmining.stochasticbpmn.models.bpmn.stochastic.extension;
 
 import org.processmining.models.graphbased.directed.bpmn.BPMNDiagram;
+import org.processmining.models.graphbased.directed.bpmn.elements.Flow;
 import org.processmining.models.graphbased.directed.bpmn.elements.Gateway;
 import org.processmining.stochasticbpmn.models.bpmn.extensions.BpmnExtensionElement;
 import org.processmining.plugins.bpmn.Bpmn;
-import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
-import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGateway;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.*;
 import org.xmlpull.v1.XmlPullParser;
 
 import java.util.Collection;
@@ -42,10 +42,13 @@ public class StochasticBpmnGatewayWeights extends BpmnExtensionElement {
         return s.toString();
     }
 
-    public void marshall(BPMNDiagram diagram, Gateway gateway) {
-        StochasticBpmnGatewayWeightedElement element = new StochasticBpmnGatewayWeightedElement();
-        element.marshall(diagram, gateway);
-        this.weightedElements.add(element);
+    public void marshall(BPMNDiagram diagram, StochasticGatewayWeightedFlow weightedFlow) {
+        for (StochasticGatewayFlowSet weightedFlowSet : weightedFlow.getWeightedFlowSets()) {
+            StochasticBpmnGatewayWeightedElement element = new StochasticBpmnGatewayWeightedElement();
+            element.marshall(diagram, weightedFlowSet, weightedFlow.getFlowWeight(weightedFlowSet));
+            this.weightedElements.add(element);
+        }
+
     }
 
     public Collection<StochasticBpmnGatewayWeightedElement> getWeightedElements() {

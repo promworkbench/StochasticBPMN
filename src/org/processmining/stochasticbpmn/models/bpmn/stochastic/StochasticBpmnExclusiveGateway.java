@@ -3,6 +3,7 @@ package org.processmining.stochasticbpmn.models.bpmn.stochastic;
 import org.processmining.models.graphbased.directed.bpmn.BPMNDiagram;
 import org.processmining.models.graphbased.directed.bpmn.BPMNEdge;
 import org.processmining.models.graphbased.directed.bpmn.BPMNNode;
+import org.processmining.models.graphbased.directed.bpmn.elements.Flow;
 import org.processmining.models.graphbased.directed.bpmn.elements.Gateway;
 import org.processmining.models.graphbased.directed.bpmn.elements.SubProcess;
 import org.processmining.models.graphbased.directed.bpmn.elements.Swimlane;
@@ -13,6 +14,7 @@ import org.processmining.stochasticbpmn.models.bpmn.stochastic.extension.Stochas
 import org.processmining.stochasticbpmn.models.bpmn.stochastic.extension.StochasticBpmnGatewayWeightedElement;
 import org.processmining.stochasticbpmn.models.bpmn.stochastic.extension.StochasticBpmnGatewayWeights;
 import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticBPMNDiagram;
+import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticFlow;
 import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGateway;
 import org.processmining.stochasticbpmn.models.graphbased.directed.bpmn.stochastic.StochasticGatewayWeightedFlow;
 import org.xmlpull.v1.XmlPullParser;
@@ -49,6 +51,9 @@ public class StochasticBpmnExclusiveGateway extends BpmnExclusiveGateway {
         }
         for (BpmnIncoming incoming : incomings) {
             s.append(incoming.exportElement());
+        }
+        for (BpmnOutgoing outgoing : outgoings) {
+            s.append(outgoing.exportElement());
         }
         return s.toString();
     }
@@ -118,7 +123,7 @@ public class StochasticBpmnExclusiveGateway extends BpmnExclusiveGateway {
         }
     }
 
-    public void marshall(BPMNDiagram diagram, Gateway gateway){
+    public void marshall(StochasticBPMNDiagram diagram, StochasticGateway gateway){
         super.marshall(gateway);
         int incoming = 0;
         int outgoing = 0;
@@ -153,8 +158,11 @@ public class StochasticBpmnExclusiveGateway extends BpmnExclusiveGateway {
             setPrivateField("defaultFlow", defaultFlowValue, BpmnAbstractGateway.class);
         }
 
+        StochasticBpmnGatewayWeights extensionElement = new StochasticBpmnGatewayWeights();
+        extensionElement.marshall(diagram, gateway.getWeightedFlow());
         BpmnExtensionElements extensionElements = new BpmnExtensionElements(Collections.singletonMap("gatewayWeights", StochasticBpmnGatewayWeights.class));
-        extensionElements.marshall(diagram, gateway);
+        extensionElements.addExtensionElement(extensionElement);
+
         this.extensionElements = extensionElements;
     }
 

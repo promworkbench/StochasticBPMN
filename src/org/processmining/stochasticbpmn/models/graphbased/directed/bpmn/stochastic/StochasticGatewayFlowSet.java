@@ -26,6 +26,10 @@ public class StochasticGatewayFlowSet {
         return Objects.equals(flows, bpmnPaths.flows);
     }
 
+    public boolean contains(String id) {
+        return flows.contains(id);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hashCode(flows);
